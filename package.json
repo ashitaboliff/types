@@ -1,0 +1,47 @@
+{
+	"name": "@ashitabo/types",
+	"type": "module",
+	"version": "0.0.0",
+	"description": "A starter for creating a TypeScript package.",
+	"author": "watabegg ",
+	"homepage": "https://github.com/author/library#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/author/library.git"
+	},
+	"bugs": {
+		"url": "https://github.com/author/library/issues"
+	},
+	"exports": {
+		".": "./dist/index.mjs",
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.mts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsdown",
+		"dev": "tsdown --watch",
+		"test": "vitest",
+		"ts": "tsc --noEmit",
+		"check": "biome check .",
+		"check:fix": "biome check --write .",
+		"prepublishOnly": "pnpm run build"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.2.4",
+		"@hono/zod-openapi": "^1.1.5",
+		"@types/node": "^24.10.1",
+		"bumpp": "^10.3.2",
+		"hono": "^4.10.7",
+		"tsdown": "^0.17.0",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.15"
+	},
+	"dependencies": {
+		"zod": "^4.1.13"
+	}
+}
