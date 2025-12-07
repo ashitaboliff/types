@@ -1,5 +1,4 @@
 import { z } from '@hono/zod-openapi'
-import { email } from 'zod'
 import * as example from '@/modules/user/examples'
 
 const UserIdParamSchema = z.object({ userId: z.string().min(1) })
@@ -47,7 +46,7 @@ export const UserSchema = z
 		name: z.string().nullable(),
 		userId: z.string().optional(),
 		password: z.string().optional(),
-		email: email().optional(),
+		email: z.email().optional(),
 		emailVerified: z.boolean().optional(),
 		image: z.string().nullable(),
 		role: UserAccountRoleSchema.nullable(),

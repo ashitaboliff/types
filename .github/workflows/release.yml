@@ -1,0 +1,54 @@
+name: Release Types Package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'types-v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.12.4
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: https://registry.npmjs.org
+
+      - name: Lint
+        run: pnpm run check
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Type check
+        run: pnpm run ts
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Configure npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @ashitabo/types
+        run: pnpm publish --access restricted --no-git-checks
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
