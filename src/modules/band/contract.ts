@@ -12,7 +12,7 @@ export const BAND_TAG = registerFeatureTag({
 	description: 'バンド情報とメンバー管理を扱うAPI。',
 })
 
-export const getMyBands = createAuthenticatedRoute({
+export const GetBandMe = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'get',
 	path: '/me',
@@ -34,7 +34,7 @@ export const getMyBands = createAuthenticatedRoute({
 	},
 })
 
-export const getBandsByUser = createAuthenticatedRoute({
+export const GetBandUserUserId = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'get',
 	path: '/user/{userId}',
@@ -59,7 +59,7 @@ export const getBandsByUser = createAuthenticatedRoute({
 	},
 })
 
-export const createBand = createAuthenticatedRoute({
+export const PostBand = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'post',
 	path: '/',
@@ -88,7 +88,7 @@ export const createBand = createAuthenticatedRoute({
 	},
 })
 
-export const getBandById = createApiRoute({
+export const GetBandBandId = createApiRoute({
 	tags: [BAND_TAG.name],
 	method: 'get',
 	path: '/{bandId}',
@@ -113,7 +113,7 @@ export const getBandById = createApiRoute({
 	},
 })
 
-export const updateBand = createAuthenticatedRoute({
+export const PutBandBandId = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'put',
 	path: '/{bandId}',
@@ -146,7 +146,7 @@ export const updateBand = createAuthenticatedRoute({
 	},
 })
 
-export const deleteBand = createAuthenticatedRoute({
+export const DeleteBandBandId = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'delete',
 	path: '/{bandId}',
@@ -174,7 +174,7 @@ export const deleteBand = createAuthenticatedRoute({
 	},
 })
 
-export const addBandMember = createAuthenticatedRoute({
+export const PostBandBandIdMembers = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'post',
 	path: '/{bandId}/members',
@@ -207,7 +207,7 @@ export const addBandMember = createAuthenticatedRoute({
 	},
 })
 
-export const updateBandMember = createAuthenticatedRoute({
+export const PutBandMembersBandMemberId = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'put',
 	path: '/members/{bandMemberId}',
@@ -240,12 +240,12 @@ export const updateBandMember = createAuthenticatedRoute({
 	},
 })
 
-export const removeBandMember = createAuthenticatedRoute({
+export const DeleteBandMembersBandMemberId = createAuthenticatedRoute({
 	tags: [BAND_TAG.name],
 	method: 'delete',
 	path: '/members/{bandMemberId}',
 	summary: 'バンドメンバー削除',
-	operationId: 'removeBandMember',
+	operationId: 'deleteBandMember',
 	request: {
 		params: schema.BandMemberIdParam,
 	},
@@ -268,7 +268,7 @@ export const removeBandMember = createAuthenticatedRoute({
 	},
 })
 
-export const searchBandUsers = createApiRoute({
+export const GetBandSearchUsers = createApiRoute({
 	tags: [BAND_TAG.name],
 	method: 'get',
 	path: '/search-users',

@@ -3,12 +3,12 @@ import { HTTP_STATUS, HTTP_STATUS_MESSAGE } from '@/shared/http'
 import { createAuthenticatedRoute } from '@/shared/openapi'
 import { BOOKING_TAG } from './tag'
 
-export const listDeniedBookings = createAuthenticatedRoute({
+export const GetBookingDenied = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/denied',
 	summary: '予約禁止一覧',
-	operationId: 'listDeniedBookings',
+	operationId: 'getBookingDenied',
 	request: {
 		query: schema.AdminDeniedBookingQuerySchema,
 	},
@@ -28,12 +28,12 @@ export const listDeniedBookings = createAuthenticatedRoute({
 	},
 })
 
-export const adminCreateDeniedBooking = createAuthenticatedRoute({
+export const PostBookingDenied = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'post',
 	path: '/denied',
 	summary: '予約禁止作成',
-	operationId: 'adminCreateDeniedBooking',
+	operationId: 'postBookingDenied',
 	request: {
 		body: {
 			content: {
@@ -54,12 +54,12 @@ export const adminCreateDeniedBooking = createAuthenticatedRoute({
 	},
 })
 
-export const adminDeleteDeniedBooking = createAuthenticatedRoute({
+export const DeleteBookingDeniedBooking = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'delete',
 	path: '/denied/{deniedBookingId}',
 	summary: '予約禁止削除',
-	operationId: 'adminDeleteDeniedBooking',
+	operationId: 'deleteBookingDeniedBooking',
 	request: {
 		params: schema.DeniedBookingIdParam,
 	},

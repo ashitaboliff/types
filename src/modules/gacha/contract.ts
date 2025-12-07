@@ -12,12 +12,12 @@ export const GACHA_TAG = registerFeatureTag({
 	description: 'ガチャ履歴の参照と記録を扱うAPI。',
 })
 
-export const listUserGacha = createAuthenticatedRoute({
+export const GetGachaUsersUserId = createAuthenticatedRoute({
 	tags: [GACHA_TAG.name],
 	method: 'get',
 	path: '/users/{userId}',
 	summary: 'ユーザーのガチャ履歴一覧',
-	operationId: 'listUserGacha',
+	operationId: 'getGachaUsersUserId',
 	request: {
 		params: UserIdParam,
 		query: schema.GachaQuerySchema,
@@ -33,12 +33,12 @@ export const listUserGacha = createAuthenticatedRoute({
 	},
 })
 
-export const getGachaBySrc = createAuthenticatedRoute({
+export const GetGachaUsersUserIdBySrc = createAuthenticatedRoute({
 	tags: [GACHA_TAG.name],
 	method: 'get',
 	path: '/users/{userId}/by-src',
 	summary: 'ユーザーの指定ソース最新ガチャ取得',
-	operationId: 'getGachaBySrc',
+	operationId: 'getGachaUsersUserIdBySrc',
 	request: {
 		params: UserIdParam,
 		query: schema.GachaSrcQuerySchema,
@@ -59,12 +59,12 @@ export const getGachaBySrc = createAuthenticatedRoute({
 	},
 })
 
-export const createUserGacha = createAuthenticatedRoute({
+export const PostGachaUsersUserId = createAuthenticatedRoute({
 	tags: [GACHA_TAG.name],
 	method: 'post',
 	path: '/users/{userId}',
 	summary: 'ユーザーのガチャ記録作成',
-	operationId: 'createUserGacha',
+	operationId: 'postGachaUsersUserId',
 	request: {
 		params: UserIdParam,
 		body: {
@@ -92,12 +92,12 @@ export const createUserGacha = createAuthenticatedRoute({
 	},
 })
 
-export const createGachaImageProxyUrls = createAuthenticatedRoute({
+export const PostGachaImagesProxy = createAuthenticatedRoute({
 	tags: [GACHA_TAG.name],
 	method: 'post',
 	path: '/images/proxy',
 	summary: 'ガチャ画像用プロキシURLの生成',
-	operationId: 'createGachaImageProxyUrls',
+	operationId: 'postGachaImagesProxy',
 	request: {
 		body: {
 			content: {

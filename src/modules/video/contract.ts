@@ -12,12 +12,12 @@ export const VIDEO_TAG = registerFeatureTag({
 	description: 'YouTube動画やプレイリストに関するAPI',
 })
 
-export const searchVideos = createApiRoute({
+export const GetVideoSearch = createApiRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'get',
 	path: '/search',
 	summary: '動画・プレイリスト検索',
-	operationId: 'searchVideos',
+	operationId: 'getVideoSearch',
 	request: {
 		query: schema.YoutubeSearchQuerySchema,
 	},
@@ -31,12 +31,12 @@ export const searchVideos = createApiRoute({
 	},
 })
 
-export const listYoutubeIds = createApiRoute({
+export const GetVideoIds = createApiRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'get',
 	path: '/ids',
 	summary: '動画またはプレイリストID一覧',
-	operationId: 'listYoutubeIds',
+	operationId: 'getVideoIds',
 	request: {
 		query: schema.VideoIdsQuerySchema,
 	},
@@ -50,12 +50,12 @@ export const listYoutubeIds = createApiRoute({
 	},
 })
 
-export const getVideoDetail = createApiRoute({
+export const GetVideoVideosVideoId = createApiRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'get',
 	path: '/videos/{videoId}',
 	summary: '動画詳細取得',
-	operationId: 'getVideoDetail',
+	operationId: 'getVideoVideosVideoId',
 	request: {
 		params: schema.VideoIdParam,
 	},
@@ -75,12 +75,12 @@ export const getVideoDetail = createApiRoute({
 	},
 })
 
-export const getPlaylistDetail = createApiRoute({
+export const GetVideoPlaylistsPlaylistId = createApiRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'get',
 	path: '/playlists/{playlistId}',
 	summary: 'プレイリスト詳細取得',
-	operationId: 'getPlaylistDetail',
+	operationId: 'getVideoPlaylistsPlaylistId',
 	request: {
 		params: schema.PlaylistIdParam,
 	},
@@ -100,12 +100,13 @@ export const getPlaylistDetail = createApiRoute({
 	},
 })
 
-export const listPlaylistVideos = createApiRoute({
+// キチガイみたいなルート定義でごめん
+export const GetVideoPlaylistsPlaylistIdVideos = createApiRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'get',
 	path: '/playlists/{playlistId}/videos',
 	summary: 'プレイリスト内動画一覧',
-	operationId: 'listPlaylistVideos',
+	operationId: 'getVideoPlaylistsPlaylistIdVideos',
 	request: {
 		params: schema.PlaylistIdParam,
 		query: schema.PlaylistVideosQuerySchema,
@@ -128,12 +129,12 @@ export const listPlaylistVideos = createApiRoute({
 	},
 })
 
-export const adminSyncVideos = createAuthenticatedRoute({
+export const PostVideoWebhook = createAuthenticatedRoute({
 	tags: [VIDEO_TAG.name],
 	method: 'post',
 	path: '/webhook',
 	summary: 'YouTube動画・プレイリストの同期',
-	operationId: 'adminSyncVideos',
+	operationId: 'postVideoWebhook',
 	request: {
 		body: {
 			content: {

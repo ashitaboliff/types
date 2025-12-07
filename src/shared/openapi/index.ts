@@ -1,18 +1,5 @@
-import {
-	createRoute,
-	OpenAPIHono,
-	type RouteConfig,
-	type RouteHandler,
-	z,
-} from '@hono/zod-openapi'
-import type { Env } from 'hono'
+import { createRoute, type RouteConfig, z } from '@hono/zod-openapi'
 import { HTTP_STATUS, HTTP_STATUS_MESSAGE } from '@/shared/http'
-
-export const newApp = (): OpenAPIHono<Env> => {
-	const app = new OpenAPIHono<Env>()
-
-	return app
-}
 
 export type FeatureTag = {
 	name: string
@@ -27,8 +14,6 @@ export const registerFeatureTag = (tag: FeatureTag) => {
 }
 
 export const listRegisteredTags = () => Array.from(registeredTags.values())
-
-export type App = OpenAPIHono<Env>
 
 export const ErrorResponseSchema = z
 	.object({ error: z.string() })
@@ -65,5 +50,3 @@ export const createAuthenticatedRoute = <
 				DEFAULT_UNAUTHORIZED_RESPONSE,
 		},
 	})
-
-export const handler = <R extends RouteConfig>(h: RouteHandler<R, Env>) => h

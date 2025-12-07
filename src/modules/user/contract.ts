@@ -11,12 +11,12 @@ export const USER_TAG = registerFeatureTag({
 	description: 'ユーザーの表示用データとプロフィールを扱うAPI。',
 })
 
-export const listUsersForSelect = createAuthenticatedRoute({
+export const GetUserSelect = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'get',
 	path: '/select',
 	summary: 'セレクト用ユーザー一覧',
-	operationId: 'listUsersForSelect',
+	operationId: 'getUserSelect',
 	responses: {
 		[HTTP_STATUS.OK]: {
 			description: HTTP_STATUS_MESSAGE[HTTP_STATUS.OK],
@@ -27,12 +27,12 @@ export const listUsersForSelect = createAuthenticatedRoute({
 	},
 })
 
-export const getUserProfile = createApiRoute({
+export const GetUserUserIdProfile = createApiRoute({
 	tags: [USER_TAG.name],
 	method: 'get',
 	path: '/{userId}/profile',
 	summary: 'ユーザープロフィール取得',
-	operationId: 'getUserProfile',
+	operationId: 'getUserUserIdProfile',
 	request: {
 		params: schema.UserIdParam,
 	},
@@ -52,12 +52,12 @@ export const getUserProfile = createApiRoute({
 	},
 })
 
-export const createUserProfile = createAuthenticatedRoute({
+export const PostUserUserIdProfile = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'post',
 	path: '/{userId}/profile',
 	summary: 'ユーザープロフィール作成',
-	operationId: 'createUserProfile',
+	operationId: 'postUserUserIdProfile',
 	request: {
 		params: schema.UserIdParam,
 		body: {
@@ -79,12 +79,12 @@ export const createUserProfile = createAuthenticatedRoute({
 	},
 })
 
-export const updateUserProfile = createAuthenticatedRoute({
+export const PutUserUserIdProfile = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'put',
 	path: '/{userId}/profile',
 	summary: 'ユーザープロフィール更新',
-	operationId: 'updateUserProfile',
+	operationId: 'putUserUserIdProfile',
 	request: {
 		params: schema.UserIdParam,
 		body: {
@@ -106,12 +106,12 @@ export const updateUserProfile = createAuthenticatedRoute({
 	},
 })
 
-export const listUsersForAdmin = createAuthenticatedRoute({
+export const GetUserUserIdForAdmin = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'get',
 	path: '/admin',
 	summary: 'ユーザー一覧（管理者）',
-	operationId: 'adminListUsers',
+	operationId: 'getUserUserIdForAdmin',
 	request: {
 		query: schema.UserQuerySchema,
 	},
@@ -131,12 +131,12 @@ export const listUsersForAdmin = createAuthenticatedRoute({
 	},
 })
 
-export const deleteUser = createAuthenticatedRoute({
+export const DeleteUserUserId = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'delete',
 	path: '/{userId}',
 	summary: 'ユーザー削除（管理者）',
-	operationId: 'deleteUser',
+	operationId: 'deleteUserUserId',
 	request: {
 		params: schema.UserIdParam,
 	},
@@ -153,12 +153,12 @@ export const deleteUser = createAuthenticatedRoute({
 	},
 })
 
-export const updateUserRole = createAuthenticatedRoute({
+export const PutUserUserIdRole = createAuthenticatedRoute({
 	tags: [USER_TAG.name],
 	method: 'put',
 	path: '/{userId}/role',
 	summary: 'ユーザー権限更新',
-	operationId: 'updateUserRole',
+	operationId: 'putUserUserIdRole',
 	request: {
 		params: schema.UserIdParam,
 		body: {

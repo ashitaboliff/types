@@ -11,12 +11,12 @@ export const SCHEDULE_TAG = registerFeatureTag({
 	description: 'スケジュール情報の取得・作成を扱うAPI。',
 })
 
-export const listScheduleUsers = createApiRoute({
+export const GetScheduleUsers = createApiRoute({
 	tags: [SCHEDULE_TAG.name],
 	method: 'get',
 	path: '/users',
 	summary: 'スケジュール登録可能ユーザー一覧取得',
-	operationId: 'listScheduleUsers',
+	operationId: 'getScheduleUsers',
 	responses: {
 		[HTTP_STATUS.OK]: {
 			description: HTTP_STATUS_MESSAGE[HTTP_STATUS.OK],
@@ -27,12 +27,12 @@ export const listScheduleUsers = createApiRoute({
 	},
 })
 
-export const getSchedule = createApiRoute({
+export const GetScheduleScheduleId = createApiRoute({
 	tags: [SCHEDULE_TAG.name],
 	method: 'get',
 	path: '/{scheduleId}',
 	summary: 'スケジュール取得',
-	operationId: 'getSchedule',
+	operationId: 'getScheduleScheduleId',
 	request: {
 		params: schema.ScheduleIdParam,
 	},
@@ -52,12 +52,12 @@ export const getSchedule = createApiRoute({
 	},
 })
 
-export const createSchedule = createAuthenticatedRoute({
+export const PostSchedule = createAuthenticatedRoute({
 	tags: [SCHEDULE_TAG.name],
 	method: 'post',
 	path: '/',
 	summary: 'スケジュール作成',
-	operationId: 'createSchedule',
+	operationId: 'postSchedule',
 	request: {
 		body: {
 			content: {

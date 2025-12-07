@@ -4,7 +4,7 @@ import { HTTP_STATUS, HTTP_STATUS_MESSAGE } from '@/shared/http'
 import { createApiRoute, createAuthenticatedRoute } from '@/shared/openapi'
 import { BOOKING_TAG } from './tag'
 
-export const listBookingsByRange = createApiRoute({
+export const GetBooking = createApiRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/',
@@ -23,12 +23,12 @@ export const listBookingsByRange = createApiRoute({
 	},
 })
 
-export const listBookingLogs = createApiRoute({
+export const GetBookingLogs = createApiRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/logs',
 	summary: '予約履歴一覧',
-	operationId: 'listBookingLogs',
+	operationId: 'getBookingLogs',
 	responses: {
 		[HTTP_STATUS.OK]: {
 			description: HTTP_STATUS_MESSAGE[HTTP_STATUS.OK],
@@ -39,7 +39,7 @@ export const listBookingLogs = createApiRoute({
 	},
 })
 
-export const getBookingById = createApiRoute({
+export const GetBookingBookingId = createApiRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/{bookingId}',
@@ -64,12 +64,12 @@ export const getBookingById = createApiRoute({
 	},
 })
 
-export const listBookingsByUser = createAuthenticatedRoute({
+export const GetBookingUserUserId = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/user/{userId}',
 	summary: 'ユーザー別予約一覧',
-	operationId: 'getBookingsByUser',
+	operationId: 'getBookingUserUserId',
 	request: {
 		params: UserIdParam,
 		query: schema.BookingUserQuerySchema,
@@ -90,12 +90,12 @@ export const listBookingsByUser = createAuthenticatedRoute({
 	},
 })
 
-export const createBooking = createAuthenticatedRoute({
+export const PostBooking = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'post',
 	path: '/',
 	summary: '予約作成',
-	operationId: 'createBooking',
+	operationId: 'postBooking',
 	request: {
 		body: {
 			content: {
@@ -131,12 +131,12 @@ export const createBooking = createAuthenticatedRoute({
 	},
 })
 
-export const verifyBookingPassword = createAuthenticatedRoute({
+export const PostBookingBookingIdVerify = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'post',
 	path: '/{bookingId}/verify',
 	summary: '予約パスワード検証',
-	operationId: 'verifyBookingPassword',
+	operationId: 'postBookingBookingIdVerify',
 	request: {
 		params: schema.BookingIdParam,
 		body: {
@@ -175,12 +175,12 @@ export const verifyBookingPassword = createAuthenticatedRoute({
 	},
 })
 
-export const updateBooking = createAuthenticatedRoute({
+export const PutBookingBookingId = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'put',
 	path: '/{bookingId}',
 	summary: '予約更新',
-	operationId: 'updateBooking',
+	operationId: 'putBookingBookingId',
 	request: {
 		params: schema.BookingIdParam,
 		body: {
@@ -220,12 +220,12 @@ export const updateBooking = createAuthenticatedRoute({
 	},
 })
 
-export const deleteBooking = createAuthenticatedRoute({
+export const DeleteBookingBookingId = createAuthenticatedRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'delete',
 	path: '/{bookingId}',
 	summary: '予約削除',
-	operationId: 'deleteBooking',
+	operationId: 'deleteBookingBookingId',
 	request: {
 		params: schema.BookingIdParam,
 		body: {
@@ -259,12 +259,12 @@ export const deleteBooking = createAuthenticatedRoute({
 	},
 })
 
-export const getAllBookingIds = createApiRoute({
+export const GetBookingIds = createApiRoute({
 	tags: [BOOKING_TAG.name],
 	method: 'get',
 	path: '/ids',
 	summary: '予約ID一覧',
-	operationId: 'getAllBookingIds',
+	operationId: 'getBookingIds',
 	responses: {
 		[HTTP_STATUS.OK]: {
 			description: HTTP_STATUS_MESSAGE[HTTP_STATUS.OK],

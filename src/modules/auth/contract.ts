@@ -1,9 +1,7 @@
 import { z } from '@hono/zod-openapi'
-import type { Handler } from 'hono'
 import * as schema from '@/modules/auth/schema'
 import { HTTP_STATUS, HTTP_STATUS_MESSAGE } from '@/shared/http'
 import {
-	type App,
 	createApiRoute,
 	createAuthenticatedRoute,
 	DEFAULT_UNAUTHORIZED_RESPONSE,
@@ -16,7 +14,7 @@ export const AUTH_TAG = registerFeatureTag({
 	description: 'LINEログインによるセッション管理と部室鍵認証を提供します。',
 })
 
-export const listPadLocks = createAuthenticatedRoute({
+export const GetAuthAdminPadLocks = createAuthenticatedRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/admin/padlocks',
@@ -39,7 +37,7 @@ export const listPadLocks = createAuthenticatedRoute({
 	},
 })
 
-export const createPadLock = createAuthenticatedRoute({
+export const PostAuthAdminPadLocks = createAuthenticatedRoute({
 	tags: [AUTH_TAG.name],
 	method: 'post',
 	path: '/admin/padlocks',
@@ -66,7 +64,7 @@ export const createPadLock = createAuthenticatedRoute({
 	},
 })
 
-export const deletePadLock = createAuthenticatedRoute({
+export const DeleteAuthAdminPadLocksPadLockId = createAuthenticatedRoute({
 	tags: [AUTH_TAG.name],
 	method: 'delete',
 	path: '/admin/padlocks/{padLockId}',
@@ -89,7 +87,7 @@ export const deletePadLock = createAuthenticatedRoute({
 	},
 })
 
-export const verifyPadlockPassword = createApiRoute({
+export const PostAuthPadlock = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'post',
 	path: '/padlock',
@@ -147,7 +145,7 @@ const Redirect302Response = {
 	description: '外部認可/次ステップへのリダイレクト (Location ヘッダ参照)',
 } as const
 
-export const authSignIn = createApiRoute({
+export const GetAuthSignIn = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/signin',
@@ -158,7 +156,7 @@ export const authSignIn = createApiRoute({
 	},
 })
 
-export const authSignInProvider = createApiRoute({
+export const GetAuthSignInProvider = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/signin/{provider}',
@@ -173,7 +171,7 @@ export const authSignInProvider = createApiRoute({
 	},
 })
 
-export const authCallback = createApiRoute({
+export const GetAuthCallbackProvider = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/callback/{provider}',
@@ -188,7 +186,7 @@ export const authCallback = createApiRoute({
 	},
 })
 
-export const authSession = createApiRoute({
+export const GetAuthSession = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/session',
@@ -212,7 +210,7 @@ export const authSession = createApiRoute({
 	},
 })
 
-export const authSignOut = createApiRoute({
+export const PostAuthSignOut = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'post',
 	path: '/signout',
@@ -223,7 +221,7 @@ export const authSignOut = createApiRoute({
 	},
 })
 
-export const authError = createApiRoute({
+export const GetAuthError = createApiRoute({
 	tags: [AUTH_TAG.name],
 	method: 'get',
 	path: '/error',
@@ -245,18 +243,3 @@ export const authError = createApiRoute({
 		},
 	},
 })
-
-export const registerAuthJsOpenApiRoutes = (app: App) => {
-	const passthrough: Handler = async (c, next) => {
-		await next()
-		if (c.finalized || c.res) return c.res
-		c.status(204)
-		return c.body(null)
-	}
-	app.openapi(authSignIn, passthrough)
-	app.openapi(authSignInProvider, passthrough)
-	app.openapi(authCallback, passthrough)
-	app.openapi(authSession, passthrough)
-	app.openapi(authSignOut, passthrough)
-	app.openapi(authError, passthrough)
-}
