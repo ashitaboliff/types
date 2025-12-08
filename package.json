@@ -36,7 +36,9 @@
 		"ts": "tsc --noEmit",
 		"check": "biome check .",
 		"check:fix": "biome check --write .",
-		"prepublishOnly": "pnpm run build"
+		"prepublishOnly": "pnpm run build",
+		"link:global": "pnpm link --global",
+		"unlink:global": "pnpm unlink --global"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",

@@ -39,3 +39,13 @@ publishConfig は private (`access: restricted`) を前提にしています。R
 - タグ命名: `types-v1.2.3` のように `types-v` プレフィックスでタグを打つと Release Workflow が発火して publish されます。
 - 手動公開: `pnpm publish --access restricted`（`NPM_TOKEN` 必須）。
 - CI/Release で走る前提スクリプト: `check` → `test` → `ts` → `build`。
+
+## FE/BE でローカル開発リンク
+別リポジトリのフロント・バックエンドからローカルの types を使う場合は pnpm のグローバルリンクを利用します。
+
+1. types リポジトリで公開: `pnpm --filter @ashitabo/types run link:global`
+2. FE/BE リポジトリで取得: `pnpm link --global @ashitabo/types`
+3. ウォッチ反映: `pnpm --filter @ashitabo/types run dev`
+4. 解除: `pnpm unlink --global @ashitabo/types`（types 側は `pnpm --filter @ashitabo/types run unlink:global`）
+
+詳細手順: `packages/types/DEV-LINK.md` を参照。
