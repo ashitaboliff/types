@@ -38,7 +38,7 @@ FE, BE, types, 親リポジトリが別管理の場合でも、pnpm のグロー
 pnpm か npm の `.npmrc` に以下を設定してください（FE/BE 両リポジトリ）。
 
 ```
-@ashitabo:registry=https://npm.pkg.github.com
+@ashitaboliff:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN_WITH_PACKAGES_READ}
 ```
 

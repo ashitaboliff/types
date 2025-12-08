@@ -45,12 +45,12 @@ jobs:
 
       - name: Configure npm auth
         run: |
-          echo "@ashitabo:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "@ashitaboliff:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish @ashitabo/types to GitHub Packages
+      - name: Publish @ashitaboliff/types to GitHub Packages
         run: pnpm publish --access restricted --no-git-checks --registry https://npm.pkg.github.com
         env:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
