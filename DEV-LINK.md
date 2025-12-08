@@ -1,4 +1,4 @@
-# @ashitabo/types を FE / BE ローカル開発でリンクする手順
+# @ashitaboliff/types を FE / BE ローカル開発でリンクする手順
 
 FE, BE, types, 親リポジトリが別管理の場合でも、pnpm のグローバルリンクで開発同期できます。
 
@@ -9,25 +9,25 @@ FE, BE, types, 親リポジトリが別管理の場合でも、pnpm のグロー
 ## 手順
 1. **types リポジトリでリンク公開**
    ```bash
-   pnpm --filter @ashitabo/types run build   # 一度ビルド（初回のみ推奨）
-   pnpm --filter @ashitabo/types run link:global
+   pnpm --filter @ashitaboliff/types run build   # 一度ビルド（初回のみ推奨）
+   pnpm --filter @ashitaboliff/types run link:global
    ```
-   - `node_modules/.pnpm-global` 配下に @ashitabo/types が公開されます。
+   - `node_modules/.pnpm-global` 配下に @ashitaboliff/types が公開されます。
 
 2. **FE / BE 各リポジトリでリンクを取得**
    ```bash
-   pnpm link --global @ashitabo/types
+   pnpm link --global @ashitaboliff/types
    pnpm install  # リゾルブ確認のため推奨
    ```
-   - package.json に `@ashitabo/types` がある前提。無い場合は `pnpm add @ashitabo/types` してからリンク。
+   - package.json に `@ashitaboliff/types` がある前提。無い場合は `pnpm add @ashitaboliff/types` してからリンク。
 
 3. **開発中の反映**
-   - types 側: `pnpm --filter @ashitabo/types run dev` で tsdown ウォッチビルド
+   - types 側: `pnpm --filter @ashitaboliff/types run dev` で tsdown ウォッチビルド
    - FE/BE 側: ホットリロードがあればそのまま反映。なければ再起動。
 
 4. **リンク解除**
-   - FE/BE 側: `pnpm unlink --global @ashitabo/types`
-   - types 側: `pnpm --filter @ashitabo/types run unlink:global`
+   - FE/BE 側: `pnpm unlink --global @ashitaboliff/types`
+   - types 側: `pnpm --filter @ashitaboliff/types run unlink:global`
 
 ## トラブルシュート
 - 解決できない場合は一度 FE/BE の `node_modules` を削除して `pnpm install`。 

@@ -1,17 +1,17 @@
-# @ashitabo/types
+# @ashitaboliff/types
 
 あしたぼのフロントエンド・バックエンド間で共有する Zod スキーマ / 推論型 / @hono/zod-openapi の契約定義をまとめたパッケージです。
 
 ## インストール
 
 ```bash
-pnpm add @ashitabo/types zod @hono/zod-openapi
+pnpm add @ashitaboliff/types zod @hono/zod-openapi
 ```
 
 ## 使い方
 
 ```ts
-import { userSchema, authContract } from '@ashitabo/types'
+import { userSchema, authContract } from '@ashitaboliff/types'
 
 const user = userSchema.UserSchema.parse(payload)
 const route = authContract.PostAuthPadlock
@@ -43,9 +43,9 @@ const route = authContract.PostAuthPadlock
 ## FE/BE でローカル開発リンク
 別リポジトリのフロント・バックエンドからローカルの types を使う場合は pnpm のグローバルリンクを利用します。
 
-1. types リポジトリで公開: `pnpm --filter @ashitabo/types run link:global`
-2. FE/BE リポジトリで取得: `pnpm link --global @ashitabo/types`
-3. ウォッチ反映: `pnpm --filter @ashitabo/types run dev`
-4. 解除: `pnpm unlink --global @ashitabo/types`（types 側は `pnpm --filter @ashitabo/types run unlink:global`）
+1. types リポジトリで公開: `pnpm --filter @ashitaboliff/types run link:global`
+2. FE/BE リポジトリで取得: `pnpm link --global @ashitaboliff/types`
+3. ウォッチ反映: `pnpm --filter @ashitaboliff/types run dev`
+4. 解除: `pnpm unlink --global @ashitaboliff/types`（types 側は `pnpm --filter @ashitaboliff/types run unlink:global`）
 
 詳細手順: `packages/types/DEV-LINK.md` を参照。
