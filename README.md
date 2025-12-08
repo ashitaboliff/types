@@ -30,9 +30,9 @@ const route = authContract.PostAuthPadlock
 2. 変更後は `pnpm run check` / `test` / `ts` / `build` を実行
 3. PR/CI は lint→test→build の順で実行されます
 
-## 配布について
+## 配布について（GitHub Packages）
 
-publishConfig は private (`access: restricted`) を前提にしています。Release 用 GitHub Actions で npm token を用意してください。
+`publishConfig.registry` を `https://npm.pkg.github.com` に設定しています。GitHub Packages への publish には `GITHUB_TOKEN`（packages:write 権限）が必要です。
 
 ## バージョニングとリリース運用
 - バージョン更新: `pnpm bumpp patch` などで `package.json` を更新しコミット。

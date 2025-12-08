@@ -33,3 +33,13 @@ FE, BE, types, 親リポジトリが別管理の場合でも、pnpm のグロー
 - 解決できない場合は一度 FE/BE の `node_modules` を削除して `pnpm install`。 
 - pnpm のグローバルディレクトリは `pnpm config get global-dir` で確認できます。
 - ESM/CJS 両方を出力しているため、Node16 以前の環境だと CJS 側を利用してください（engines>=18 推奨）。
+
+## GitHub Packages から取得する場合
+pnpm か npm の `.npmrc` に以下を設定してください（FE/BE 両リポジトリ）。
+
+```
+@ashitabo:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN_WITH_PACKAGES_READ}
+```
+
+`GITHUB_TOKEN_WITH_PACKAGES_READ` は `packages:read` 権限付きの PAT かリポジトリの GITHUB_TOKEN でも可（CI で install する場合）。

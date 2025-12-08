@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'types-v*'
+      - 'v*'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
 
       - name: Lint
         run: pnpm run check
@@ -44,11 +44,13 @@ jobs:
         run: pnpm run build
 
       - name: Configure npm auth
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        run: |
+          echo "@ashitabo:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish @ashitabo/types
-        run: pnpm publish --access restricted --no-git-checks
+      - name: Publish @ashitabo/types to GitHub Packages
+        run: pnpm publish --access restricted --no-git-checks --registry https://npm.pkg.github.com
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
