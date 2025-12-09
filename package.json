@@ -13,8 +13,8 @@
 		"url": "https://github.com/ashitaboliff/types/issues"
 	},
 	"exports": {
-		"./modules/*": "./dist/modules/*.mjs",
-		"./shared/*": "./dist/shared/*.mjs",
+		"./modules/*": "./dist/modules/*/index.mjs",
+		"./shared/*": "./dist/shared/*/index.mjs",
 		"./package.json": "./package.json"
 	},
 	"main": "./dist/index.mjs",
