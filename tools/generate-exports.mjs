@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
 import { glob } from 'glob'
-import path from 'path'
 
 const generateExports = () => {
 	const pkgPath = path.resolve('package.json')
@@ -12,11 +12,11 @@ const generateExports = () => {
 	pkg.exports = pkg.exports || {}
 	for (const file of files) {
 		// 例: dist/modules/user/schema.js → ./modules/user/schema
-		const subpath = './' + file.replace(/^dist\//, '').replace(/\.js$/, '')
+		const subpath = `./${file.replace(/^dist\//, '').replace(/\.js$/, '')}`
 
 		pkg.exports[subpath] = {
-			import: './' + file,
-			types: './' + file.replace(/\.js$/, '.d.ts'),
+			import: `./${file}`,
+			types: `./${file.replace(/\.js$/, '.d.ts')}`,
 		}
 	}
 
