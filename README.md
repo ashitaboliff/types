@@ -11,10 +11,9 @@ pnpm add @ashitaboliff/types zod @hono/zod-openapi
 ## 使い方
 
 ```ts
-import { userSchema, authContract } from '@ashitaboliff/types'
+import * as contract from '@ashitaboliff/types/modules/auth/contract'
 
-const user = userSchema.UserSchema.parse(payload)
-const route = authContract.PostAuthPadlock
+...
 ```
 
 ## スクリプト
