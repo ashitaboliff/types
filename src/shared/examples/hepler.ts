@@ -1,13 +1,4 @@
-const USER_ROLES = ['GRADUATE', 'STUDENT'] as const
-const USER_PARTS = [
-	'VOCAL',
-	'BACKING_GUITAR',
-	'LEAD_GUITAR',
-	'BASS',
-	'DRUMS',
-	'KEYBOARD',
-	'OTHER',
-] as const
+import { USER_PARTS, USER_ROLES } from '@/modules/user/constants'
 
 export const pickRole = () => USER_ROLES[1]
 
