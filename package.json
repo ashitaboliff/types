@@ -12,14 +12,6 @@
 	"bugs": {
 		"url": "https://github.com/ashitaboliff/types/issues"
 	},
-	"exports": {
-		"./modules/*": "./dist/modules/*/index.mjs",
-		"./shared/*": "./dist/shared/*/index.mjs",
-		"./package.json": "./package.json"
-	},
-	"main": "./dist/index.mjs",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.mts",
 	"files": [
 		"dist"
 	],
@@ -35,7 +27,6 @@
 		"ts": "tsc --noEmit",
 		"check": "biome check .",
 		"check:fix": "biome check --write .",
-		"prepublishOnly": "pnpm run build",
 		"link:global": "pnpm link --global",
 		"unlink:global": "pnpm unlink --global"
 	},
