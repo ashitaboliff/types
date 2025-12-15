@@ -1,7 +1,6 @@
 import { z } from '@hono/zod-openapi'
+import { SortSchema } from '@/modules/shared/schema'
 import * as example from '@/modules/user/examples'
-
-const UserIdParamSchema = z.object({ userId: z.string().min(1) })
 
 export const UserAccountRoleSchema = z
 	.enum(['TOPADMIN', 'ADMIN', 'USER'])
@@ -30,16 +29,6 @@ export const UserRoleSchema = z.enum(['GRADUATE', 'STUDENT']).openapi({
 	example: 'STUDENT',
 })
 
-export const UserIdParam = UserIdParamSchema.openapi({
-	param: {
-		name: 'userId',
-		in: 'path',
-		description: '対象となるユーザーID',
-		required: true,
-	},
-	example: 'user_1234567890',
-})
-
 export const UserSchema = z
 	.object({
 		id: z.string(),
@@ -49,7 +38,7 @@ export const UserSchema = z
 		email: z.email().optional(),
 		emailVerified: z.boolean().optional(),
 		image: z.string().nullable(),
-		role: UserAccountRoleSchema.nullable(),
+		role: UserAccountRoleSchema,
 		createdAt: z.string(),
 		updatedAt: z.string(),
 	})
@@ -118,7 +107,7 @@ export const UserSelectListSchema = z.array(UserSelectItemSchema).openapi({
 
 export const UserQuerySchema = z
 	.object({
-		sort: z.enum(['new', 'old']).default('new'),
+		sort: SortSchema.default('new'),
 		page: z.coerce.number().int().positive().default(1),
 		perPage: z.coerce.number().int().min(1).max(100).default(10),
 	})

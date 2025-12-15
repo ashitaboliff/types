@@ -1,5 +1,6 @@
 import { z } from '@hono/zod-openapi'
 import * as example from '@/modules/booking/examples'
+import { SortSchema } from '@/modules/shared/schema'
 
 const BookingIdParamSchema = z.object({ bookingId: z.string().min(1) })
 
@@ -103,7 +104,7 @@ export const BookingDeleteSchema = z
 
 export const BookingUserQuerySchema = z
 	.object({
-		sort: z.enum(['new', 'old']).default('new'),
+		sort: SortSchema.default('new'),
 		page: z.coerce.number().int().positive().default(1),
 		perPage: z.coerce.number().int().min(1).max(50).default(10),
 	})

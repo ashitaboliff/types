@@ -21,9 +21,11 @@ export const GachaRarityEnum = z.enum([
 	'SECRET_RARE',
 ])
 
+export const GachaSortSchema = z.enum(['new', 'old', 'rare', 'notrare'])
+
 export const GachaQuerySchema = z
 	.object({
-		sort: z.enum(['new', 'old', 'rare', 'notrare']).default('new'),
+		sort: GachaSortSchema.default('new'),
 		page: z.coerce.number().int().positive().default(1),
 		perPage: z.coerce.number().int().min(1).max(100).default(10),
 	})

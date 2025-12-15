@@ -1,6 +1,7 @@
 import type { z } from '@hono/zod-openapi'
 import type {
 	AdminDeniedBookingQuerySchema,
+	AdminDeniedSortSchema,
 	BookingResponseSchema,
 	DeniedBookingSchema,
 	GetBookingQuerySchema,
@@ -19,4 +20,4 @@ export type AdminDeniedBookingQuery = z.infer<
 	typeof AdminDeniedBookingQuerySchema
 >
 
-export type DeniedBookingSort = AdminDeniedBookingQuery['sort']
+export type AdminDeniedSort = z.infer<typeof AdminDeniedSortSchema>

@@ -1,17 +1,6 @@
 import { z } from '@hono/zod-openapi'
-import {
-	buildAdminSyncPayloadExample,
-	buildAdminSyncQueuedExample,
-	buildAdminSyncResponseExample,
-	buildPlaylistDetailExample,
-	buildPlaylistDocExample,
-	buildPlaylistVideosResponseExample,
-	buildSearchQueryExample,
-	buildSearchResponseExample,
-	buildVideoDetailExample,
-	buildVideoDocExample,
-	buildVideoIdsResponseExample,
-} from '@/modules/video/examples'
+import { SortSchema } from '@/modules/shared/schema'
+import * as examples from '@/modules/video/examples'
 
 const PlaylistIdParamSchema = z.object({ playlistId: z.string().min(1) })
 const VideoIdParamSchema = z.object({ videoId: z.string().min(1) })
@@ -34,9 +23,11 @@ export const VideoIdParam = VideoIdParamSchema.openapi({
 	},
 })
 
+export const liveOrBandSchema = z.enum(['live', 'band'])
+
 export const YoutubeSearchQuerySchema = z
 	.object({
-		liveOrBand: z.enum(['live', 'band']).openapi({
+		liveOrBand: liveOrBandSchema.openapi({
 			description: '検索対象。"live" はプレイリスト、"band" は動画を検索。',
 		}),
 		bandName: z.string().optional().openapi({
@@ -45,7 +36,7 @@ export const YoutubeSearchQuerySchema = z
 		liveName: z.string().optional().openapi({
 			description: 'プレイリストタイトル部分一致フィルタ。',
 		}),
-		sort: z.enum(['new', 'old']).default('new').openapi({
+		sort: SortSchema.default('new').openapi({
 			description: 'liveDate の昇順/降順。',
 		}),
 		page: z.coerce.number().int().positive().default(1).openapi({
@@ -61,7 +52,7 @@ export const YoutubeSearchQuerySchema = z
 	})
 	.openapi({
 		title: 'YoutubeSearchQuery',
-		example: buildSearchQueryExample(),
+		example: examples.buildSearchQueryExample(),
 	})
 
 export const PlaylistDocSchema = z
@@ -75,7 +66,10 @@ export const PlaylistDocSchema = z
 		createdAt: z.string(),
 		updatedAt: z.string(),
 	})
-	.openapi({ title: 'PlaylistDoc', example: buildPlaylistDocExample() })
+	.openapi({
+		title: 'PlaylistDoc',
+		example: examples.buildPlaylistDocExample(),
+	})
 
 export const VideoDocSchema = z
 	.object({
@@ -89,18 +83,18 @@ export const VideoDocSchema = z
 		createdAt: z.string(),
 		updatedAt: z.string(),
 	})
-	.openapi({ title: 'VideoDoc', example: buildVideoDocExample() })
+	.openapi({ title: 'VideoDoc', example: examples.buildVideoDocExample() })
 
 export const PlaylistDetailSchema = PlaylistDocSchema.extend({
 	videos: z.array(VideoDocSchema),
 }).openapi({
 	title: 'PlaylistDetail',
-	example: buildPlaylistDetailExample(),
+	example: examples.buildPlaylistDetailExample(),
 })
 
 export const VideoDetailSchema = VideoDocSchema.openapi({
 	title: 'VideoDetail',
-	example: buildVideoDetailExample(),
+	example: examples.buildVideoDetailExample(),
 })
 
 export const AdminSyncPayloadSchema = z
@@ -110,7 +104,7 @@ export const AdminSyncPayloadSchema = z
 	.default({})
 	.openapi({
 		title: 'AdminSyncPayload',
-		example: buildAdminSyncPayloadExample(),
+		example: examples.buildAdminSyncPayloadExample(),
 	})
 
 export const AdminSyncResponseSchema = z
@@ -121,7 +115,7 @@ export const AdminSyncResponseSchema = z
 	})
 	.openapi({
 		title: 'AdminSyncResponse',
-		example: buildAdminSyncResponseExample(),
+		example: examples.buildAdminSyncResponseExample(),
 	})
 
 export const AdminSyncQueuedResponseSchema = z
@@ -131,7 +125,7 @@ export const AdminSyncQueuedResponseSchema = z
 	})
 	.openapi({
 		title: 'AdminSyncQueuedResponse',
-		example: buildAdminSyncQueuedExample(),
+		example: examples.buildAdminSyncQueuedExample(),
 	})
 
 export const SearchResponseSchema = z
@@ -143,7 +137,7 @@ export const SearchResponseSchema = z
 	})
 	.openapi({
 		title: 'VideoSearchResponse',
-		example: buildSearchResponseExample(),
+		example: examples.buildSearchResponseExample(),
 	})
 
 export const PlaylistVideosQuerySchema = z
@@ -160,7 +154,7 @@ export const PlaylistVideosResponseSchema = z
 	})
 	.openapi({
 		title: 'PlaylistVideosResponse',
-		example: buildPlaylistVideosResponseExample(),
+		example: examples.buildPlaylistVideosResponseExample(),
 	})
 
 export const VideoIdsQuerySchema = z
@@ -174,5 +168,5 @@ export const VideoIdsQuerySchema = z
 
 export const VideoIdsResponseSchema = z.array(z.string()).openapi({
 	title: 'VideoIdsResponse',
-	example: buildVideoIdsResponseExample(),
+	example: examples.buildVideoIdsResponseExample(),
 })

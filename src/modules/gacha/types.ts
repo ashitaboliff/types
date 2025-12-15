@@ -9,12 +9,13 @@ import type {
 	GachaQuerySchema,
 	GachaRarityEnum,
 	GachaResponseSchema,
+	GachaSortSchema,
 } from '@/modules/gacha/schema'
 
 export type Gacha = z.infer<typeof GachaResponseSchema>
 export type GachaListResponse = z.infer<typeof GachaListResponseSchema>
 export type GachaQuery = z.infer<typeof GachaQuerySchema>
-export type GachaSort = GachaQuery['sort']
+export type GachaSort = z.infer<typeof GachaSortSchema>
 export type GachaCreate = z.infer<typeof GachaCreateSchema>
 export type GachaCreateWithOverride = z.infer<
 	typeof GachaCreateWithOverrideSchema

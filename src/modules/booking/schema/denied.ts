@@ -5,6 +5,8 @@ const DeniedBookingIdParamSchema = z.object({
 	deniedBookingId: z.string().min(1),
 })
 
+export const AdminDeniedSortSchema = z.enum(['new', 'old', 'relativeCurrent'])
+
 export const DeniedBookingSchema = z
 	.object({
 		id: z.string(),
@@ -23,7 +25,7 @@ export const DeniedBookingSchema = z
 
 export const AdminDeniedBookingQuerySchema = z
 	.object({
-		sort: z.enum(['new', 'old', 'relativeCurrent']).default('new'),
+		sort: AdminDeniedSortSchema.default('new'),
 		page: z.coerce.number().int().positive().default(1),
 		perPage: z.coerce.number().int().min(1).max(100).default(10),
 		today: z
