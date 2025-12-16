@@ -45,10 +45,7 @@ export const PublicBookingSchema = BookingSchema.omit({
 })
 
 export const BookingResponseSchema = z
-	.record(
-		z.string(),
-		z.record(z.string().regex(/^\d+$/), PublicBookingSchema),
-	)
+	.record(z.string(), z.record(z.string().regex(/^\d+$/), PublicBookingSchema))
 	.openapi({
 		title: 'BookingResponse',
 		example: example.buildBookingResponseExample(),
