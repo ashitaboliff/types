@@ -55,7 +55,7 @@ export const AdminDeniedBookingCreateSchema = z
 
 export const AdminDeniedBookingResponseSchema = z
 	.object({
-		data: z.array(DeniedBookingSchema.nullable()),
+		data: z.array(DeniedBookingSchema),
 		totalCount: z.number().min(0),
 	})
 	.openapi({
