@@ -1,8 +1,8 @@
-# @ashitaboliff/types 仕様書 (v2.4.4)
+# @ashitaboliff/types 仕様書 (v2.4.5)
 
 ## 目的と範囲
 - 本書は packages/types 配下 (src/modules/*, src/shared/*) で提供される Zod スキーマと推論型・定数をモジュール別に整理する。
-- バージョン: package.json より 2.4.3 時点の実装を対象。
+- バージョン: package.json より 2.4.5 時点の実装を対象。
 - 実装差分が発生した場合は本書を更新し、スキーマ → 型 → 契約の順で整合性を取ること。
 
 ## 共通 (shared)
@@ -41,7 +41,7 @@
 - 取得クエリ: GetBookingQuerySchema `{ start, end: YYYY-MM-DD }`。
 - BookingSchema (内部): `{ id, userId, bookingDate, bookingTime:int, registName, name, createdAt, updatedAt, isDeleted, password }`。
 - PublicBookingSchema: BookingSchema から password を除外。
-- BookingResponseSchema: `Record<date, Record<slotIndexString, PublicBooking>>`。
+- BookingResponseSchema: `Record<date, Record<slotIndexString, PublicBooking|null>>`。
 - 作成: BookingCreateSchema `{ userId, bookingDate:YYYY-MM-DD, bookingTime:int>=0, registName:1..255, name:1..255, password:min1, today:YYYY-MM-DD }` → BookingCreateResponseSchema `{ id: uuid }`。
 - 更新: BookingUpdateSchema `{ bookingDate, bookingTime:int>=0, registName, name, today, authToken?: string }`。
 - 削除: BookingDeleteSchema `{ authToken?: string }` (デフォルト空オブジェクト)。
