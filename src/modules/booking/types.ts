@@ -3,6 +3,7 @@ import type {
 	AdminDeniedBookingQuerySchema,
 	AdminDeniedBookingResponseSchema,
 	AdminDeniedSortSchema,
+	BookingAccessTokenResponseSchema,
 	BookingByUserResponseSchema,
 	BookingCreateSchema,
 	BookingDeleteSchema,
@@ -28,6 +29,10 @@ export type BookingUpdate = z.infer<typeof BookingUpdateSchema>
 export type BookingDelete = z.infer<typeof BookingDeleteSchema>
 
 export type BookingByUserResponse = z.infer<typeof BookingByUserResponseSchema>
+
+export type BookingAccessTokenResponse = z.infer<
+	typeof BookingAccessTokenResponseSchema
+>
 
 export type AdminDeniedBookingResponse = z.infer<
 	typeof AdminDeniedBookingResponseSchema
