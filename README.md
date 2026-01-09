@@ -4,8 +4,10 @@
 
 ## インストール
 
+`package.json` の `dependencies` に以下を追加してください。
+
 ```bash
-pnpm add @ashitaboliff/types @hono/zod-openapi
+"@ashitabo/types": "github:ashitaboliff/types#vx.y.z",
 ```
 
 ## 使い方
@@ -96,34 +98,25 @@ export const getUserDetailsListAction = async ({
 3. PR/CI は lint→test→build の順で実行されます
 4. CI で組み込みたいですが、現状は手動で@/docs/spec.mdの更新をお願いします
 
-## 配布について（GitHub Packages）
+## 配布について（GitHub Repo）
 
-`publishConfig.registry` を `https://npm.pkg.github.com` に設定しています。
+GitHubに/distを含めた状態でpushし、配布しています(通常はかなり有り得ないけど手間すぎるから)。
 
 ## バージョニングとリリース運用
-- バージョン更新: `pnpm bumpp` で `package.json` を更新しコミット。
-- タグを打つと Release Workflow が発火して publish されます。手動ダメ絶対
-- CI/Release で走る前提スクリプト: `check` → `test` → `ts` → `build`。
+- 変更後に必ず `pnpm run build` を実行し、`dist`を生成したのち、`package.json` の`exports`を更新。
+- 変更をすべてコミット。
+- バージョン更新: `pnpm bumpp` が `package.json` を更新しコミットまでしてくれる。
+
+これでタグが切られ、使用箇所で
+
+```
+"@ashitabo/types": "github:ashitaboliff/types#vx.y.z",
+```
+のようにバージョン指定できます。
+
 
 ## FE/BE でローカル開発
 
 ### 普通に使う
 
-あなたがashitaboliffのメンバーであれば利用できます。まずはGitHubを開いて右上のアイコンから「Settings」→「Developer settings」→「Personal access tokens」→「Tokens (classic)」で「Generate new token」を押して、必要な権限（packages:read）を付与してトークンを発行してください。
-
-FE/BE で通常通り `pnpm i` をする前に
-```bash
-export NPM_TOKEN=ghp_xxxxyyyzzzz # GitHub Packages の読み取り権限付きトークン
-```
-
-を設定してから `pnpm i` を実行してください。`.npmrc` に自動でトークンが設定され、GitHub Packages から `@ashitaboliff/types` を取得できるようになります。
-
-### pnpm グローバルリンクを使う
-別リポジトリのフロント・バックエンドからローカルの types を使う場合は pnpm のグローバルリンクを利用します。
-
-1. types リポジトリで公開: `pnpm --filter @ashitaboliff/types run link:global`
-2. FE/BE リポジトリで取得: `pnpm link --global @ashitaboliff/types`
-3. ウォッチ反映: `pnpm --filter @ashitaboliff/types run dev`
-4. 解除: `pnpm unlink --global @ashitaboliff/types`（types 側は `pnpm --filter @ashitaboliff/types run unlink:global`）
-
-詳細手順: `packages/types/DEV-LINK.md` を参照。
+普通に `pnpm install` すれば使えます。
