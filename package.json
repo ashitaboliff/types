@@ -1,7 +1,7 @@
 {
   "name": "@ashitaboliff/types",
   "type": "module",
-  "version": "2.4.8",
+  "version": "2.4.9",
   "description": "あしたぼホームページ用の型定義パッケージ",
   "author": "ashitabo",
   "files": [
