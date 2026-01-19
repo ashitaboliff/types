@@ -1,25 +1,14 @@
-import { SortSchema } from "../../shared/schema.js";
+import { SortOrderSchema } from "../../shared/schema/index.js";
 import { buildBookingAccessTokenResponseExample, buildBookingByUserResponseExample, buildBookingCreateExample, buildBookingCreateResponseExample, buildBookingLogsExample, buildBookingPasswordExample, buildBookingQueryExample, buildBookingResponseExample, buildBookingUpdateExample, buildPublicBookingExample } from "../examples/booking.js";
 import { buildBookingIdsExample } from "../examples/denied.js";
-import { z } from "@hono/zod-openapi";
+import { z } from "zod";
 
 //#region src/modules/booking/schema/booking.ts
+const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 const BookingIdParamSchema = z.object({ bookingId: z.string().min(1) });
-const GetBookingQuerySchema = z.object({
-	start: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-	end: z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
-}).openapi({
-	title: "GetBookingsQuery",
-	example: buildBookingQueryExample()
-});
-const BookingIdParam = BookingIdParamSchema.openapi({
-	param: {
-		name: "bookingId",
-		in: "path",
-		description: "予約ID",
-		required: true
-	},
-	example: "11111111-1111-4111-8111-111111111111"
+const BookingRangeQuerySchema = z.object({
+	start: z.string().regex(dateRegex),
+	end: z.string().regex(dateRegex)
 });
 const BookingSchema = z.object({
 	id: z.string(),
@@ -33,77 +22,57 @@ const BookingSchema = z.object({
 	isDeleted: z.boolean(),
 	password: z.string()
 });
-const PublicBookingSchema = BookingSchema.omit({ password: true }).openapi({
-	title: "PublicBooking",
-	example: buildPublicBookingExample()
-});
-const BookingResponseSchema = z.record(z.string(), z.record(z.string().regex(/^\d+$/), PublicBookingSchema.nullable())).openapi({
-	title: "BookingResponse",
-	example: buildBookingResponseExample()
-});
-const BookingCreateSchema = z.object({
+const BookingPublicSchema = BookingSchema.omit({ password: true });
+const BookingCalendarResponseSchema = z.record(z.string(), z.record(z.string().regex(/^\d+$/), BookingPublicSchema.nullable()));
+const BookingCreateRequestSchema = z.object({
 	userId: z.string().min(1),
-	bookingDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+	bookingDate: z.string().regex(dateRegex),
 	bookingTime: z.number().int().min(0),
 	registName: z.string().min(1).max(255),
 	name: z.string().min(1).max(255),
 	password: z.string().min(1),
-	today: z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
-}).openapi({
-	title: "BookingCreate",
-	example: buildBookingCreateExample()
+	today: z.string().regex(dateRegex)
 });
-const BookingCreateResponseSchema = z.object({ id: z.uuid() }).openapi({
-	title: "BookingCreateResponse",
-	example: buildBookingCreateResponseExample()
-});
-const BookingUpdateSchema = z.object({
-	bookingDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+const BookingCreateResponseSchema = z.object({ id: z.string().uuid() });
+const BookingUpdateRequestSchema = z.object({
+	bookingDate: z.string().regex(dateRegex),
 	bookingTime: z.number().int().min(0),
 	registName: z.string().min(1).max(255),
 	name: z.string().min(1).max(255),
-	today: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+	today: z.string().regex(dateRegex),
 	authToken: z.string().min(1).optional()
-}).openapi({
-	title: "BookingUpdate",
-	example: buildBookingUpdateExample()
 });
-const BookingDeleteSchema = z.object({ authToken: z.string().min(1).optional() }).default({}).openapi({
-	title: "BookingDeleteRequest",
-	example: { authToken: "booking-token-example" }
-});
-const BookingUserQuerySchema = z.object({
-	sort: SortSchema.default("new"),
+const BookingDeleteRequestSchema = z.object({ authToken: z.string().min(1).optional() }).default({});
+const BookingUserListQuerySchema = z.object({
+	sort: SortOrderSchema.default("new"),
 	page: z.coerce.number().int().positive().default(1),
 	perPage: z.coerce.number().int().min(1).max(50).default(10)
-}).openapi({ title: "BookingUserQuery" });
-const BookingPasswordSchema = z.object({ password: z.string().min(1) }).openapi({
-	title: "BookingPasswordRequest",
-	example: buildBookingPasswordExample()
 });
+const BookingPasswordVerifyRequestSchema = z.object({ password: z.string().min(1) });
 const BookingAccessTokenResponseSchema = z.object({
 	token: z.string().min(1),
-	expiresAt: z.string().openapi({ example: "2025-01-01T00:10:00.000Z" })
-}).openapi({
-	title: "BookingAccessTokenResponse",
-	example: buildBookingAccessTokenResponseExample()
+	expiresAt: z.string()
 });
-const BookingLogsResponseSchema = z.array(PublicBookingSchema).openapi({
-	title: "BookingLogsResponse",
-	example: buildBookingLogsExample()
-});
-const BookingByUserResponseSchema = z.object({
-	bookings: z.array(PublicBookingSchema),
+const BookingLogsResponseSchema = z.array(BookingPublicSchema);
+const BookingUserListResponseSchema = z.object({
+	bookings: z.array(BookingPublicSchema),
 	totalCount: z.number().int().nonnegative()
-}).openapi({
-	title: "BookingByUserResponse",
-	example: buildBookingByUserResponseExample()
 });
-const BookingIdsSchema = z.array(z.uuid()).openapi({
-	title: "BookingIds",
-	example: buildBookingIdsExample()
-});
-const BookingErrorResponseSchema = z.object({ error: z.string() }).openapi({ title: "BookingError" });
+const BookingIdsResponseSchema = z.array(z.string().uuid());
+const BookingErrorResponseSchema = z.object({ error: z.string() });
+const bookingExamples = {
+	rangeQuery: buildBookingQueryExample(),
+	publicBooking: buildPublicBookingExample(),
+	calendarResponse: buildBookingResponseExample(),
+	createRequest: buildBookingCreateExample(),
+	createResponse: buildBookingCreateResponseExample(),
+	updateRequest: buildBookingUpdateExample(),
+	passwordRequest: buildBookingPasswordExample(),
+	accessTokenResponse: buildBookingAccessTokenResponseExample(),
+	logsResponse: buildBookingLogsExample(),
+	userListResponse: buildBookingByUserResponseExample(),
+	idsResponse: buildBookingIdsExample()
+};
 
 //#endregion
-export { BookingAccessTokenResponseSchema, BookingByUserResponseSchema, BookingCreateResponseSchema, BookingCreateSchema, BookingDeleteSchema, BookingErrorResponseSchema, BookingIdParam, BookingIdsSchema, BookingLogsResponseSchema, BookingPasswordSchema, BookingResponseSchema, BookingSchema, BookingUpdateSchema, BookingUserQuerySchema, GetBookingQuerySchema, PublicBookingSchema };
+export { BookingAccessTokenResponseSchema, BookingCalendarResponseSchema, BookingCreateRequestSchema, BookingCreateResponseSchema, BookingDeleteRequestSchema, BookingErrorResponseSchema, BookingIdParamSchema, BookingIdsResponseSchema, BookingLogsResponseSchema, BookingPasswordVerifyRequestSchema, BookingPublicSchema, BookingRangeQuerySchema, BookingSchema, BookingUpdateRequestSchema, BookingUserListQuerySchema, BookingUserListResponseSchema, bookingExamples };

@@ -1,7 +1,11 @@
-import { z } from "@hono/zod-openapi";
+import { DeniedBookingExample } from "../examples/helper.js";
+import { z } from "zod";
 
 //#region src/modules/booking/schema/denied.d.ts
-declare const AdminDeniedSortSchema: z.ZodEnum<{
+declare const DeniedBookingIdParamSchema: z.ZodObject<{
+  deniedBookingId: z.ZodString;
+}, z.core.$strip>;
+declare const DeniedBookingSortSchema: z.ZodEnum<{
   new: "new";
   old: "old";
   relativeCurrent: "relativeCurrent";
@@ -16,7 +20,7 @@ declare const DeniedBookingSchema: z.ZodObject<{
   updatedAt: z.ZodString;
   isDeleted: z.ZodBoolean;
 }, z.core.$strip>;
-declare const AdminDeniedBookingQuerySchema: z.ZodObject<{
+declare const DeniedBookingAdminQuerySchema: z.ZodObject<{
   sort: z.ZodDefault<z.ZodEnum<{
     new: "new";
     old: "old";
@@ -26,13 +30,13 @@ declare const AdminDeniedBookingQuerySchema: z.ZodObject<{
   perPage: z.ZodDefault<z.ZodCoercedNumber<unknown>>;
   today: z.ZodDefault<z.ZodString>;
 }, z.core.$strip>;
-declare const AdminDeniedBookingCreateSchema: z.ZodObject<{
+declare const DeniedBookingCreateRequestSchema: z.ZodObject<{
   startDate: z.ZodUnion<readonly [z.ZodString, z.ZodArray<z.ZodString>]>;
   startTime: z.ZodNumber;
   endTime: z.ZodOptional<z.ZodNumber>;
   description: z.ZodString;
 }, z.core.$strip>;
-declare const AdminDeniedBookingResponseSchema: z.ZodObject<{
+declare const DeniedBookingAdminListResponseSchema: z.ZodObject<{
   data: z.ZodArray<z.ZodObject<{
     id: z.ZodString;
     startDate: z.ZodString;
@@ -45,8 +49,24 @@ declare const AdminDeniedBookingResponseSchema: z.ZodObject<{
   }, z.core.$strip>>;
   totalCount: z.ZodNumber;
 }, z.core.$strip>;
-declare const DeniedBookingIdParam: z.ZodObject<{
-  deniedBookingId: z.ZodString;
-}, z.core.$strip>;
+declare const deniedBookingExamples: {
+  entity: DeniedBookingExample;
+  query: {
+    sort: "relativeCurrent";
+    page: number;
+    perPage: number;
+    today: string;
+  };
+  createRequest: {
+    startDate: string;
+    startTime: number;
+    endTime: number;
+    description: string;
+  };
+  listResponse: {
+    data: DeniedBookingExample[];
+    totalCount: number;
+  };
+};
 //#endregion
-export { AdminDeniedBookingCreateSchema, AdminDeniedBookingQuerySchema, AdminDeniedBookingResponseSchema, AdminDeniedSortSchema, DeniedBookingIdParam, DeniedBookingSchema };
+export { DeniedBookingAdminListResponseSchema, DeniedBookingAdminQuerySchema, DeniedBookingCreateRequestSchema, DeniedBookingIdParamSchema, DeniedBookingSchema, DeniedBookingSortSchema, deniedBookingExamples };
