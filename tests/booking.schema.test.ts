@@ -1,24 +1,24 @@
 import { describe, expect, it } from 'vitest'
 import {
 	BookingAccessTokenResponseSchema,
+	BookingCalendarResponseSchema,
+	BookingCreateRequestSchema,
 	BookingCreateResponseSchema,
-	BookingCreateSchema,
-	BookingDeleteSchema,
+	BookingDeleteRequestSchema,
 	BookingErrorResponseSchema,
-	BookingIdsSchema,
-	BookingResponseSchema,
-	BookingUserQuerySchema,
-	PublicBookingSchema,
+	BookingIdsResponseSchema,
+	BookingPublicSchema,
+	BookingUserListQuerySchema,
 } from '../src/modules/booking/schema'
 
 describe('Booking schemas', () => {
 	it('rejects booking create without required fields', () => {
-		const result = BookingCreateSchema.safeParse({})
+		const result = BookingCreateRequestSchema.safeParse({})
 		expect(result.success).toBe(false)
 	})
 
 	it('accepts minimal valid create payload', () => {
-		const result = BookingCreateSchema.safeParse({
+		const result = BookingCreateRequestSchema.safeParse({
 			userId: 'user_1',
 			bookingDate: '2024-01-01',
 			bookingTime: 9,
@@ -31,7 +31,7 @@ describe('Booking schemas', () => {
 	})
 
 	it('public booking omits password', () => {
-		const parsed = PublicBookingSchema.parse({
+		const parsed = BookingPublicSchema.parse({
 			id: 'b1',
 			userId: 'u1',
 			bookingDate: '2024-01-01',
@@ -47,11 +47,11 @@ describe('Booking schemas', () => {
 	})
 
 	it('booking delete defaults to empty object', () => {
-		expect(BookingDeleteSchema.parse({})).toEqual({})
+		expect(BookingDeleteRequestSchema.parse({})).toEqual({})
 	})
 
 	it('booking list response allows map structure', () => {
-		const result = BookingResponseSchema.safeParse({
+		const result = BookingCalendarResponseSchema.safeParse({
 			'2024-01-01': {
 				'9': {
 					id: 'b1',
@@ -70,7 +70,7 @@ describe('Booking schemas', () => {
 	})
 
 	it('user query has defaults', () => {
-		const parsed = BookingUserQuerySchema.parse({})
+		const parsed = BookingUserListQuerySchema.parse({})
 		expect(parsed.page).toBe(1)
 		expect(parsed.perPage).toBe(10)
 		expect(parsed.sort).toBe('new')
@@ -78,8 +78,9 @@ describe('Booking schemas', () => {
 
 	it('ids and responses validate shapes', () => {
 		expect(
-			BookingIdsSchema.safeParse(['11111111-1111-4111-8111-111111111111'])
-				.success,
+			BookingIdsResponseSchema.safeParse([
+				'11111111-1111-4111-8111-111111111111',
+			]).success,
 		).toBe(true)
 		expect(
 			BookingCreateResponseSchema.safeParse({

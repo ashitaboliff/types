@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'vitest'
 import {
-	ScheduleCreatedResponseSchema,
-	ScheduleCreateSchema,
+	ScheduleCreateRequestSchema,
+	ScheduleCreateResponseSchema,
 	ScheduleErrorResponseSchema,
 } from '../src/modules/schedule/schema'
 
 describe('Schedule schemas', () => {
 	it('rejects create payload without userId', () => {
-		const result = ScheduleCreateSchema.safeParse({ title: 'event' })
+		const result = ScheduleCreateRequestSchema.safeParse({ title: 'event' })
 		expect(result.success).toBe(false)
 	})
 
 	it('applies defaults for mention and timeExtended', () => {
-		const parsed = ScheduleCreateSchema.parse({
+		const parsed = ScheduleCreateRequestSchema.parse({
 			userId: 'user_1',
 			title: 'event',
 			dates: ['2024-01-01'],
@@ -24,7 +24,7 @@ describe('Schedule schemas', () => {
 
 	it('accepts created response and error response shapes', () => {
 		expect(
-			ScheduleCreatedResponseSchema.safeParse({ id: 'sched_1' }).success,
+			ScheduleCreateResponseSchema.safeParse({ id: 'sched_1' }).success,
 		).toBe(true)
 		expect(
 			ScheduleErrorResponseSchema.safeParse({ error: 'not found' }).success,

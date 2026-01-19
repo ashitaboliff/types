@@ -1,18 +1,18 @@
 import { describe, expect, it } from 'vitest'
 import {
-	GachaCreateSchema,
+	GachaCreateRequestSchema,
 	GachaErrorResponseSchema,
 	GachaListResponseSchema,
 } from '../src/modules/gacha/schema'
 
 describe('Gacha schemas', () => {
 	it('rejects create without required fields', () => {
-		const result = GachaCreateSchema.safeParse({})
+		const result = GachaCreateRequestSchema.safeParse({})
 		expect(result.success).toBe(false)
 	})
 
 	it('accepts valid create payload', () => {
-		const result = GachaCreateSchema.safeParse({
+		const result = GachaCreateRequestSchema.safeParse({
 			userId: 'user_1',
 			gachaRarity: 'COMMON',
 			gachaVersion: 'v1',

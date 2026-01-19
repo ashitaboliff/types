@@ -1,19 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import {
-	PadLockCreateSchema,
-	PadLockIdParam,
-	PadlockRequestSchema,
-	PadlockResponseSchema,
+	PadlockCreateRequestSchema,
+	PadlockIdParamSchema,
+	PadlockVerifyRequestSchema,
+	PadlockVerifyResponseSchema,
 } from '../src/modules/auth/schema'
 
 describe('Auth schemas', () => {
 	it('requires padLockId path parameter', () => {
-		const result = PadLockIdParam.safeParse({ padLockId: '' })
+		const result = PadlockIdParamSchema.safeParse({ padLockId: '' })
 		expect(result.success).toBe(false)
 	})
 
 	it('validates padlock creation payload', () => {
-		const result = PadLockCreateSchema.safeParse({
+		const result = PadlockCreateRequestSchema.safeParse({
 			name: '部室鍵',
 			password: '1234',
 		})
@@ -21,17 +21,20 @@ describe('Auth schemas', () => {
 	})
 
 	it('rejects short password on padlock request', () => {
-		const result = PadlockRequestSchema.safeParse({ password: '' })
+		const result = PadlockVerifyRequestSchema.safeParse({ password: '' })
 		expect(result.success).toBe(false)
 	})
 
 	it('accepts response variants', () => {
-		const ok = PadlockResponseSchema.safeParse({ status: 'ok', token: 't' })
-		const locked = PadlockResponseSchema.safeParse({
+		const ok = PadlockVerifyResponseSchema.safeParse({
+			status: 'ok',
+			token: 't',
+		})
+		const locked = PadlockVerifyResponseSchema.safeParse({
 			status: 'locked',
 			attemptsRemaining: 0,
 		})
-		const invalid = PadlockResponseSchema.safeParse({ status: 'invalid' })
+		const invalid = PadlockVerifyResponseSchema.safeParse({ status: 'invalid' })
 
 		expect(ok.success && locked.success && invalid.success).toBe(true)
 	})

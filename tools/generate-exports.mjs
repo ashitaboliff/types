@@ -12,7 +12,8 @@ const generateExports = () => {
 	pkg.exports = pkg.exports || {}
 	for (const file of files) {
 		// 例: dist/modules/user/schema.js → ./modules/user/schema
-		const subpath = `./${file.replace(/^dist\//, '').replace(/\.js$/, '')}`
+		const rawSubpath = `./${file.replace(/^dist\//, '').replace(/\.js$/, '')}`
+		const subpath = rawSubpath.replace(/\/index$/, '')
 
 		pkg.exports[subpath] = {
 			import: `./${file}`,

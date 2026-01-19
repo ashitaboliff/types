@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
-	AdminSyncPayloadSchema,
 	PlaylistVideosQuerySchema,
-	SearchResponseSchema,
+	VideoAdminSyncRequestSchema,
 	VideoIdsQuerySchema,
+	VideoSearchResponseSchema,
 } from '../src/modules/video/schema'
 
 describe('Video schemas', () => {
@@ -14,14 +14,16 @@ describe('Video schemas', () => {
 	})
 
 	it('allows empty admin sync payload and limits max ids', () => {
-		expect(AdminSyncPayloadSchema.parse({})).toEqual({})
+		expect(VideoAdminSyncRequestSchema.parse({})).toEqual({})
 		expect(
-			AdminSyncPayloadSchema.safeParse({ playlistIds: Array(100).fill('id') })
-				.success,
+			VideoAdminSyncRequestSchema.safeParse({
+				playlistIds: Array(100).fill('id'),
+			}).success,
 		).toBe(true)
 		expect(
-			AdminSyncPayloadSchema.safeParse({ playlistIds: Array(101).fill('id') })
-				.success,
+			VideoAdminSyncRequestSchema.safeParse({
+				playlistIds: Array(101).fill('id'),
+			}).success,
 		).toBe(false)
 	})
 
@@ -35,7 +37,7 @@ describe('Video schemas', () => {
 	})
 
 	it('search response enforces discriminated union items', () => {
-		const result = SearchResponseSchema.safeParse({
+		const result = VideoSearchResponseSchema.safeParse({
 			items: [
 				{
 					type: 'playlist',

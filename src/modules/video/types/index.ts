@@ -1,30 +1,30 @@
-import type { z } from '@hono/zod-openapi'
+import type { z } from 'zod'
 import type {
-	AdminSyncPayloadSchema,
-	AdminSyncQueuedResponseSchema,
-	AdminSyncResponseSchema,
-	PlaylistDetailSchema,
+	PlaylistDetailResponseSchema,
 	PlaylistDocSchema,
 	PlaylistVideosQuerySchema,
 	PlaylistVideosResponseSchema,
-	SearchResponseSchema,
-	VideoDetailSchema,
+	VideoAdminSyncQueuedResponseSchema,
+	VideoAdminSyncRequestSchema,
+	VideoAdminSyncResponseSchema,
+	VideoDetailResponseSchema,
 	VideoDocSchema,
 	VideoIdsQuerySchema,
 	VideoIdsResponseSchema,
-	YoutubeSearchQuerySchema,
+	VideoSearchQuerySchema,
+	VideoSearchResponseSchema,
 } from '@/modules/video/schema'
 
 export type PlaylistDoc = z.infer<typeof PlaylistDocSchema>
 export type VideoDoc = z.infer<typeof VideoDocSchema>
-export type PlaylistDetail = z.infer<typeof PlaylistDetailSchema>
-export type VideoDetail = z.infer<typeof VideoDetailSchema>
+export type PlaylistDetail = z.infer<typeof PlaylistDetailResponseSchema>
+export type VideoDetail = z.infer<typeof VideoDetailResponseSchema>
 
 export type VideoItem = z.infer<typeof VideoDocSchema>
-export type PlaylistItem = z.infer<typeof PlaylistDetailSchema>
+export type PlaylistItem = z.infer<typeof PlaylistDetailResponseSchema>
 
-export type YoutubeSearchQuery = z.infer<typeof YoutubeSearchQuerySchema>
-export type SearchResponse = z.infer<typeof SearchResponseSchema>
+export type VideoSearchQuery = z.infer<typeof VideoSearchQuerySchema>
+export type VideoSearchResponse = z.infer<typeof VideoSearchResponseSchema>
 export type SearchResult<T extends PlaylistDoc | VideoDoc> = {
 	items: T[]
 	total: number
@@ -70,10 +70,12 @@ export type VideoSyncQueueItem =
 	| { type: 'delete-playlist'; playlistId: string }
 	| { type: 'full' }
 
-export type AdminSyncPayload = z.infer<typeof AdminSyncPayloadSchema>
-export type AdminSyncResponse = z.infer<typeof AdminSyncResponseSchema>
-export type AdminSyncQueuedResponse = z.infer<
-	typeof AdminSyncQueuedResponseSchema
+export type VideoAdminSyncRequest = z.infer<typeof VideoAdminSyncRequestSchema>
+export type VideoAdminSyncResponse = z.infer<
+	typeof VideoAdminSyncResponseSchema
+>
+export type VideoAdminSyncQueuedResponse = z.infer<
+	typeof VideoAdminSyncQueuedResponseSchema
 >
 export type PlaylistVideosQuery = z.infer<typeof PlaylistVideosQuerySchema>
 export type PlaylistVideosResponse = z.infer<

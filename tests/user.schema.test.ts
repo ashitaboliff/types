@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
-	ProfilePayloadSchema,
+	ProfileUpsertRequestSchema,
 	UserAccountRoleSchema,
 	UserSchema,
 } from '../src/modules/user/schema'
@@ -29,7 +29,7 @@ describe('User schemas', () => {
 	})
 
 	it('rejects ProfilePayload when required fields are missing', () => {
-		const result = ProfilePayloadSchema.safeParse({ role: 'STUDENT' })
+		const result = ProfileUpsertRequestSchema.safeParse({ role: 'STUDENT' })
 		expect(result.success).toBe(false)
 	})
 })

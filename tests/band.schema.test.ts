@@ -1,27 +1,29 @@
 import { describe, expect, it } from 'vitest'
 import {
+	BandCreateRequestSchema,
 	BandCreateResponseSchema,
-	BandCreateSchema,
 	BandErrorResponseSchema,
-	BandMemberCreateSchema,
+	BandMemberCreateRequestSchema,
 } from '../src/modules/band/schema'
 
 describe('Band schemas', () => {
 	it('rejects band create without name', () => {
-		const result = BandCreateSchema.safeParse({})
+		const result = BandCreateRequestSchema.safeParse({})
 		expect(result.success).toBe(false)
 	})
 
 	it('accepts valid band create', () => {
-		expect(BandCreateSchema.safeParse({ name: '新歓バンド' }).success).toBe(
-			true,
-		)
+		expect(
+			BandCreateRequestSchema.safeParse({ name: '新歓バンド' }).success,
+		).toBe(true)
 	})
 
 	it('validates band member create', () => {
 		expect(
-			BandMemberCreateSchema.safeParse({ userId: 'user_1', part: 'VOCAL' })
-				.success,
+			BandMemberCreateRequestSchema.safeParse({
+				userId: 'user_1',
+				part: 'VOCAL',
+			}).success,
 		).toBe(true)
 	})
 
