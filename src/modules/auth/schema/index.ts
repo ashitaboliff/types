@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import * as example from '@/modules/auth/examples'
 
 export const PadlockCreateRequestSchema = z.object({
 	name: z.string().min(1).max(255),
@@ -29,10 +28,3 @@ export const PadlockVerifyResponseSchema = z.object({
 	token: z.string().min(1).optional(),
 	expiresAt: z.string().optional(),
 })
-
-export const padlockExamples = {
-	createRequest: example.buildPadLockCreateExample(),
-	entity: example.buildPadLockExample(),
-	verifyRequest: example.buildPadlockRequestExample(),
-	verifyResponse: example.buildPadlockResponseOkExample(),
-}

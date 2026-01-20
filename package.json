@@ -43,14 +43,6 @@
       "import": "./dist/shared/http/index.js",
       "types": "./dist/shared/http/index.d.ts"
     },
-    "./shared/examples/index": {
-      "import": "./dist/shared/examples/index.js",
-      "types": "./dist/shared/examples/index.d.ts"
-    },
-    "./shared/examples/hepler": {
-      "import": "./dist/shared/examples/hepler.js",
-      "types": "./dist/shared/examples/hepler.d.ts"
-    },
     "./modules/video/types": {
       "import": "./dist/modules/video/types/index.js",
       "types": "./dist/modules/video/types/index.d.ts"
@@ -58,10 +50,6 @@
     "./modules/video/schema": {
       "import": "./dist/modules/video/schema/index.js",
       "types": "./dist/modules/video/schema/index.d.ts"
-    },
-    "./modules/video/examples": {
-      "import": "./dist/modules/video/examples/index.js",
-      "types": "./dist/modules/video/examples/index.d.ts"
     },
     "./modules/video/contract": {
       "import": "./dist/modules/video/contract.js",
@@ -74,10 +62,6 @@
     "./modules/user/schema": {
       "import": "./dist/modules/user/schema/index.js",
       "types": "./dist/modules/user/schema/index.d.ts"
-    },
-    "./modules/user/examples": {
-      "import": "./dist/modules/user/examples/index.js",
-      "types": "./dist/modules/user/examples/index.d.ts"
     },
     "./modules/user/contract": {
       "import": "./dist/modules/user/contract.js",
@@ -95,10 +79,6 @@
       "import": "./dist/modules/schedule/schema/index.js",
       "types": "./dist/modules/schedule/schema/index.d.ts"
     },
-    "./modules/schedule/examples": {
-      "import": "./dist/modules/schedule/examples/index.js",
-      "types": "./dist/modules/schedule/examples/index.d.ts"
-    },
     "./modules/schedule/contract": {
       "import": "./dist/modules/schedule/contract.js",
       "types": "./dist/modules/schedule/contract.d.ts"
@@ -110,10 +90,6 @@
     "./modules/gacha/schema": {
       "import": "./dist/modules/gacha/schema/index.js",
       "types": "./dist/modules/gacha/schema/index.d.ts"
-    },
-    "./modules/gacha/examples": {
-      "import": "./dist/modules/gacha/examples/index.js",
-      "types": "./dist/modules/gacha/examples/index.d.ts"
     },
     "./modules/gacha/contract": {
       "import": "./dist/modules/gacha/contract.js",
@@ -139,22 +115,6 @@
       "import": "./dist/modules/booking/schema/booking.js",
       "types": "./dist/modules/booking/schema/booking.d.ts"
     },
-    "./modules/booking/examples/index": {
-      "import": "./dist/modules/booking/examples/index.js",
-      "types": "./dist/modules/booking/examples/index.d.ts"
-    },
-    "./modules/booking/examples/helper": {
-      "import": "./dist/modules/booking/examples/helper.js",
-      "types": "./dist/modules/booking/examples/helper.d.ts"
-    },
-    "./modules/booking/examples/denied": {
-      "import": "./dist/modules/booking/examples/denied.js",
-      "types": "./dist/modules/booking/examples/denied.d.ts"
-    },
-    "./modules/booking/examples/booking": {
-      "import": "./dist/modules/booking/examples/booking.js",
-      "types": "./dist/modules/booking/examples/booking.d.ts"
-    },
     "./modules/booking/contract/tag": {
       "import": "./dist/modules/booking/contract/tag.js",
       "types": "./dist/modules/booking/contract/tag.d.ts"
@@ -179,10 +139,6 @@
       "import": "./dist/modules/band/schema/index.js",
       "types": "./dist/modules/band/schema/index.d.ts"
     },
-    "./modules/band/examples": {
-      "import": "./dist/modules/band/examples/index.js",
-      "types": "./dist/modules/band/examples/index.d.ts"
-    },
     "./modules/band/contract": {
       "import": "./dist/modules/band/contract.js",
       "types": "./dist/modules/band/contract.d.ts"
@@ -195,10 +151,6 @@
       "import": "./dist/modules/auth/schema/index.js",
       "types": "./dist/modules/auth/schema/index.d.ts"
     },
-    "./modules/auth/examples": {
-      "import": "./dist/modules/auth/examples/index.js",
-      "types": "./dist/modules/auth/examples/index.d.ts"
-    },
     "./modules/auth/contract": {
       "import": "./dist/modules/auth/contract.js",
       "types": "./dist/modules/auth/contract.d.ts"
@@ -207,17 +159,85 @@
       "import": "./dist/modules/shared/schema/index.js",
       "types": "./dist/modules/shared/schema/index.d.ts"
     },
-    "./shared/examples": {
-      "import": "./dist/shared/examples/index.js",
-      "types": "./dist/shared/examples/index.d.ts"
-    },
     "./modules/booking/schema": {
       "import": "./dist/modules/booking/schema/index.js",
       "types": "./dist/modules/booking/schema/index.d.ts"
     },
-    "./modules/booking/examples": {
-      "import": "./dist/modules/booking/examples/index.js",
-      "types": "./dist/modules/booking/examples/index.d.ts"
+    "./video/types": {
+      "import": "./dist/video/types/index.js",
+      "types": "./dist/video/types/index.d.ts"
+    },
+    "./video/schema": {
+      "import": "./dist/video/schema/index.js",
+      "types": "./dist/video/schema/index.d.ts"
+    },
+    "./user/constants": {
+      "import": "./dist/user/constants.js",
+      "types": "./dist/user/constants.d.ts"
+    },
+    "./user/types": {
+      "import": "./dist/user/types/index.js",
+      "types": "./dist/user/types/index.d.ts"
+    },
+    "./user/schema": {
+      "import": "./dist/user/schema/index.js",
+      "types": "./dist/user/schema/index.d.ts"
+    },
+    "./shared/schema": {
+      "import": "./dist/shared/schema/index.js",
+      "types": "./dist/shared/schema/index.d.ts"
+    },
+    "./schedule/types": {
+      "import": "./dist/schedule/types/index.js",
+      "types": "./dist/schedule/types/index.d.ts"
+    },
+    "./schedule/schema": {
+      "import": "./dist/schedule/schema/index.js",
+      "types": "./dist/schedule/schema/index.d.ts"
+    },
+    "./gacha/types": {
+      "import": "./dist/gacha/types/index.js",
+      "types": "./dist/gacha/types/index.d.ts"
+    },
+    "./gacha/schema": {
+      "import": "./dist/gacha/schema/index.js",
+      "types": "./dist/gacha/schema/index.d.ts"
+    },
+    "./booking/constants": {
+      "import": "./dist/booking/constants.js",
+      "types": "./dist/booking/constants.d.ts"
+    },
+    "./booking/types": {
+      "import": "./dist/booking/types/index.js",
+      "types": "./dist/booking/types/index.d.ts"
+    },
+    "./booking/schema": {
+      "import": "./dist/booking/schema/index.js",
+      "types": "./dist/booking/schema/index.d.ts"
+    },
+    "./booking/schema/denied": {
+      "import": "./dist/booking/schema/denied.js",
+      "types": "./dist/booking/schema/denied.d.ts"
+    },
+    "./booking/schema/booking": {
+      "import": "./dist/booking/schema/booking.js",
+      "types": "./dist/booking/schema/booking.d.ts"
+    },
+    "./band/types": {
+      "import": "./dist/band/types/index.js",
+      "types": "./dist/band/types/index.d.ts"
+    },
+    "./band/schema": {
+      "import": "./dist/band/schema/index.js",
+      "types": "./dist/band/schema/index.d.ts"
+    },
+    "./auth/types": {
+      "import": "./dist/auth/types/index.js",
+      "types": "./dist/auth/types/index.d.ts"
+    },
+    "./auth/schema": {
+      "import": "./dist/auth/schema/index.js",
+      "types": "./dist/auth/schema/index.d.ts"
     }
   }
 }

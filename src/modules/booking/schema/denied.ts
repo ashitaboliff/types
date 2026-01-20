@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import * as example from '@/modules/booking/examples'
 
 const dateRegex = /^\d{4}-\d{2}-\d{2}$/
 
@@ -44,10 +43,3 @@ export const DeniedBookingAdminListResponseSchema = z.object({
 	data: z.array(DeniedBookingSchema),
 	totalCount: z.number().min(0),
 })
-
-export const deniedBookingExamples = {
-	entity: example.buildDeniedBookingResponseExample()[0],
-	query: example.buildDeniedBookingQueryExample(),
-	createRequest: example.buildAdminDeniedBookingCreateExample(),
-	listResponse: example.buildAdminDeniedBookingResponseExample(),
-}

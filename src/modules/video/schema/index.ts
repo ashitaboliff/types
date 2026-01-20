@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { SortOrderSchema } from '@/modules/shared/schema'
-import * as examples from '@/modules/video/examples'
 
 export const PlaylistIdParamSchema = z.object({ playlistId: z.string().min(1) })
 export const VideoIdParamSchema = z.object({ videoId: z.string().min(1) })
@@ -84,17 +83,3 @@ export const VideoIdsQuerySchema = z.object({
 })
 
 export const VideoIdsResponseSchema = z.array(z.string())
-
-export const videoExamples = {
-	searchQuery: examples.buildSearchQueryExample(),
-	playlistDoc: examples.buildPlaylistDocExample(),
-	videoDoc: examples.buildVideoDocExample(),
-	playlistDetail: examples.buildPlaylistDetailExample(),
-	videoDetail: examples.buildVideoDetailExample(),
-	adminSyncRequest: examples.buildAdminSyncPayloadExample(),
-	adminSyncResponse: examples.buildAdminSyncResponseExample(),
-	adminSyncQueued: examples.buildAdminSyncQueuedExample(),
-	searchResponse: examples.buildSearchResponseExample(),
-	playlistVideosResponse: examples.buildPlaylistVideosResponseExample(),
-	videoIdsResponse: examples.buildVideoIdsResponseExample(),
-}

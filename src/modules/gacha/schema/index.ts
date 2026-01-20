@@ -1,16 +1,4 @@
 import { z } from 'zod'
-import {
-	buildGachaBySrcResponseExample,
-	buildGachaCreateExample,
-	buildGachaCreateWithOverrideExample,
-	buildGachaErrorExample,
-	buildGachaImageProxyRequestExample,
-	buildGachaImageProxyResponseExample,
-	buildGachaItemExample,
-	buildGachaListResponseExample,
-	buildGachaQueryExample,
-	buildGachaSrcQueryExample,
-} from '@/modules/gacha/examples'
 
 export const GachaRaritySchema = z.enum([
 	'COMMON',
@@ -74,16 +62,3 @@ export const GachaImageProxyRequestSchema = z.object({
 export const GachaImageProxyResponseSchema = z.object({
 	urls: z.record(z.string(), z.string().url()),
 })
-
-export const gachaExamples = {
-	listQuery: buildGachaQueryExample(),
-	item: buildGachaItemExample(),
-	listResponse: buildGachaListResponseExample(),
-	createRequest: buildGachaCreateExample(),
-	createOverrideRequest: buildGachaCreateWithOverrideExample(),
-	sourceQuery: buildGachaSrcQueryExample(),
-	bySourceResponse: buildGachaBySrcResponseExample(),
-	error: buildGachaErrorExample(),
-	imageProxyRequest: buildGachaImageProxyRequestExample(),
-	imageProxyResponse: buildGachaImageProxyResponseExample(),
-}

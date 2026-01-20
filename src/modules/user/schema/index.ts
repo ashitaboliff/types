@@ -1,6 +1,5 @@
 import { z } from 'zod'
 import { SortOrderSchema } from '@/modules/shared/schema'
-import * as example from '@/modules/user/examples'
 
 export const UserAccountRoleSchema = z.enum(['TOPADMIN', 'ADMIN', 'USER'])
 
@@ -96,16 +95,3 @@ export const AdminUserListResponseSchema = z.object({
 })
 
 export const UserErrorResponseSchema = z.object({ error: z.string() })
-
-export const userExamples = {
-	user: example.buildUserExample(),
-	profile: example.buildUserProfileExample(),
-	profilePayload: example.buildUserProfilePayloadExample(),
-	selectItem: example.buildUserSelectItemExample(),
-	selectList: example.buildUserSelectListExample(),
-	listQuery: example.buildUserQueryExample(),
-	updateRole: example.buildUpdateUserRoleExample(),
-	adminDetail: example.buildUserDetailForAdminExample(),
-	adminList: example.buildUserListForAdminResponseExample(),
-	error: example.buildUserErrorExample(),
-}

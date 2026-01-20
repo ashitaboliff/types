@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import * as example from '@/modules/booking/examples'
 import { SortOrderSchema } from '@/modules/shared/schema'
 
 const dateRegex = /^\d{4}-\d{2}-\d{2}$/
@@ -85,17 +84,3 @@ export const BookingUserListResponseSchema = z.object({
 export const BookingIdsResponseSchema = z.array(z.string().uuid())
 
 export const BookingErrorResponseSchema = z.object({ error: z.string() })
-
-export const bookingExamples = {
-	rangeQuery: example.buildBookingQueryExample(),
-	publicBooking: example.buildPublicBookingExample(),
-	calendarResponse: example.buildBookingResponseExample(),
-	createRequest: example.buildBookingCreateExample(),
-	createResponse: example.buildBookingCreateResponseExample(),
-	updateRequest: example.buildBookingUpdateExample(),
-	passwordRequest: example.buildBookingPasswordExample(),
-	accessTokenResponse: example.buildBookingAccessTokenResponseExample(),
-	logsResponse: example.buildBookingLogsExample(),
-	userListResponse: example.buildBookingByUserResponseExample(),
-	idsResponse: example.buildBookingIdsExample(),
-}

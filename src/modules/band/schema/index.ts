@@ -1,17 +1,4 @@
 import { z } from 'zod'
-import {
-	buildBandCreateRequestExample,
-	buildBandCreateResponseExample,
-	buildBandErrorExample,
-	buildBandExample,
-	buildBandListExample,
-	buildBandMemberCreateExample,
-	buildBandMemberExample,
-	buildBandMemberUpdateExample,
-	buildBandSearchQueryExample,
-	buildBandSearchResultExample,
-	buildBandUpdateRequestExample,
-} from '@/modules/band/examples'
 import { UserPartSchema } from '@/modules/user/schema'
 
 export const BandIdParamSchema = z.object({ bandId: z.string().min(1) })
@@ -95,17 +82,3 @@ export const BandSearchResponseSchema = z.array(
 )
 
 export const BandErrorResponseSchema = z.object({ error: z.string() })
-
-export const bandExamples = {
-	band: buildBandExample(),
-	bandList: buildBandListExample(),
-	bandMember: buildBandMemberExample(),
-	createRequest: buildBandCreateRequestExample(),
-	createResponse: buildBandCreateResponseExample(),
-	updateRequest: buildBandUpdateRequestExample(),
-	memberCreateRequest: buildBandMemberCreateExample(),
-	memberUpdateRequest: buildBandMemberUpdateExample(),
-	searchQuery: buildBandSearchQueryExample(),
-	searchResponse: buildBandSearchResultExample(),
-	error: buildBandErrorExample(),
-}

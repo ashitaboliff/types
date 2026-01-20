@@ -26,7 +26,7 @@ export const verifyPadlockPassword = createRoute({
 	request: {
 		body: {
 			content: {
-				'application/json': { schema: schema.PadlockRequestSchema },
+				'application/json': { schema: schema.PadlockVerifyRequestSchema },
 			},
 		},
 	},
@@ -34,19 +34,19 @@ export const verifyPadlockPassword = createRoute({
 		[HTTP_STATUS.OK]: {
 			description: 'パスワードが正しい場合のレスポンス',
 			content: {
-				'application/json': { schema: schema.PadlockResponseSchema },
+				'application/json': { schema: schema.PadlockVerifyResponseSchema },
 			},
 		},
 		[HTTP_STATUS.BAD_REQUEST]: {
 			description: 'パスワードが間違っている場合のレスポンス',
 			content: {
-				'application/json': { schema: schema.PadlockResponseSchema },
+				'application/json': { schema: schema.PadlockVerifyResponseSchema },
 			},
 		},
 		[HTTP_STATUS.FORBIDDEN]: {
 			description: '試行回数超過でロックされた場合のレスポンス',
 			content: {
-				'application/json': { schema: schema.PadlockResponseSchema },
+				'application/json': { schema: schema.PadlockVerifyResponseSchema },
 			},
 		},
 	},
@@ -58,14 +58,14 @@ export const verifyPadlockPassword = createRoute({
 2. フロントエンドでAPIを呼び出す際にスキーマ、型定義を利用したい場合
 
 ```ts
-import { UserQuery, UserListForAdmin } from '@ashitaboliff/types/modules/user/type'
-import { UserQuerySchema, UserListForAdminResponseSchema } from '@ashitaboliff/types/modules/user/schema'
+import { UserListQuery, AdminUserListResponse } from '@ashitaboliff/types/modules/user/types'
+import { UserListQuerySchema, AdminUserListResponseSchema } from '@ashitaboliff/types/modules/user/schema'
 
 export const getUserDetailsListAction = async ({
 	page,
 	perPage,
 	sort,
-}: UserQuery): Promise<ApiResponse<UserListForAdmin>> => {
+}: UserListQuery): Promise<ApiResponse<AdminUserListResponse>> => {
   // Server ActionsでAPIを叩く際にschemasを指定できる神の仕様、あり
 	const res = await apiGet('/users/admin', {
 		searchParams: { page, perPage, sort },
@@ -74,8 +74,8 @@ export const getUserDetailsListAction = async ({
 			tags: ['users', `users-page-${page}-perPage-${perPage}-sort-${sort}`],
 		},
 		schemas: {
-			searchParams: UserQuerySchema,
-			response: UserListForAdminResponseSchema,
+			searchParams: UserListQuerySchema,
+			response: AdminUserListResponseSchema,
 		},
 	})
 
