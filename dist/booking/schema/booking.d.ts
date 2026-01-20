@@ -21,26 +21,26 @@ declare const BookingSchema: z.ZodObject<{
   password: z.ZodString;
 }, z.core.$strip>;
 declare const BookingPublicSchema: z.ZodObject<{
-  name: z.ZodString;
   id: z.ZodString;
-  createdAt: z.ZodString;
-  updatedAt: z.ZodString;
-  isDeleted: z.ZodBoolean;
   userId: z.ZodString;
   bookingDate: z.ZodString;
   bookingTime: z.ZodNumber;
   registName: z.ZodString;
+  name: z.ZodString;
+  createdAt: z.ZodString;
+  updatedAt: z.ZodString;
+  isDeleted: z.ZodBoolean;
 }, z.core.$strip>;
 declare const BookingCalendarResponseSchema: z.ZodRecord<z.ZodString, z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodObject<{
-  name: z.ZodString;
   id: z.ZodString;
-  createdAt: z.ZodString;
-  updatedAt: z.ZodString;
-  isDeleted: z.ZodBoolean;
   userId: z.ZodString;
   bookingDate: z.ZodString;
   bookingTime: z.ZodNumber;
   registName: z.ZodString;
+  name: z.ZodString;
+  createdAt: z.ZodString;
+  updatedAt: z.ZodString;
+  isDeleted: z.ZodBoolean;
 }, z.core.$strip>>>>;
 declare const BookingCreateRequestSchema: z.ZodObject<{
   userId: z.ZodString;
@@ -81,27 +81,27 @@ declare const BookingAccessTokenResponseSchema: z.ZodObject<{
   expiresAt: z.ZodString;
 }, z.core.$strip>;
 declare const BookingLogsResponseSchema: z.ZodArray<z.ZodObject<{
-  name: z.ZodString;
   id: z.ZodString;
-  createdAt: z.ZodString;
-  updatedAt: z.ZodString;
-  isDeleted: z.ZodBoolean;
   userId: z.ZodString;
   bookingDate: z.ZodString;
   bookingTime: z.ZodNumber;
   registName: z.ZodString;
+  name: z.ZodString;
+  createdAt: z.ZodString;
+  updatedAt: z.ZodString;
+  isDeleted: z.ZodBoolean;
 }, z.core.$strip>>;
 declare const BookingUserListResponseSchema: z.ZodObject<{
   bookings: z.ZodArray<z.ZodObject<{
-    name: z.ZodString;
     id: z.ZodString;
-    createdAt: z.ZodString;
-    updatedAt: z.ZodString;
-    isDeleted: z.ZodBoolean;
     userId: z.ZodString;
     bookingDate: z.ZodString;
     bookingTime: z.ZodNumber;
     registName: z.ZodString;
+    name: z.ZodString;
+    createdAt: z.ZodString;
+    updatedAt: z.ZodString;
+    isDeleted: z.ZodBoolean;
   }, z.core.$strip>>;
   totalCount: z.ZodNumber;
 }, z.core.$strip>;
