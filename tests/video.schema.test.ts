@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
 	PlaylistVideosQuerySchema,
 	VideoAdminSyncRequestSchema,
+	VideoAdminSyncStatusResponseSchema,
 	VideoIdsQuerySchema,
 	VideoSearchResponseSchema,
 } from '../src/modules/video/schema'
@@ -51,6 +52,18 @@ describe('Video schemas', () => {
 				},
 			],
 			total: 1,
+		})
+		expect(result.success).toBe(true)
+	})
+
+	it('sync status response accepts nullable timestamps', () => {
+		const result = VideoAdminSyncStatusResponseSchema.safeParse({
+			jobId: 'job-1',
+			status: 'processing',
+			queuedAt: '2025-01-01T00:00:00Z',
+			startedAt: null,
+			finishedAt: null,
+			error: null,
 		})
 		expect(result.success).toBe(true)
 	})

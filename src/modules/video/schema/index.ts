@@ -59,6 +59,23 @@ export const VideoAdminSyncResponseSchema = z.object({
 export const VideoAdminSyncQueuedResponseSchema = z.object({
 	status: z.literal('queued'),
 	message: z.string(),
+	jobId: z.string(),
+})
+
+export const VideoAdminSyncStatusSchema = z.enum([
+	'queued',
+	'processing',
+	'succeeded',
+	'failed',
+])
+
+export const VideoAdminSyncStatusResponseSchema = z.object({
+	jobId: z.string(),
+	status: VideoAdminSyncStatusSchema,
+	queuedAt: z.string(),
+	startedAt: z.string().nullable(),
+	finishedAt: z.string().nullable(),
+	error: z.string().nullable(),
 })
 
 export const VideoSearchResponseSchema = z.object({

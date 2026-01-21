@@ -44,7 +44,22 @@ const VideoAdminSyncResponseSchema = z.object({
 });
 const VideoAdminSyncQueuedResponseSchema = z.object({
 	status: z.literal("queued"),
-	message: z.string()
+	message: z.string(),
+	jobId: z.string()
+});
+const VideoAdminSyncStatusSchema = z.enum([
+	"queued",
+	"processing",
+	"succeeded",
+	"failed"
+]);
+const VideoAdminSyncStatusResponseSchema = z.object({
+	jobId: z.string(),
+	status: VideoAdminSyncStatusSchema,
+	queuedAt: z.string(),
+	startedAt: z.string().nullable(),
+	finishedAt: z.string().nullable(),
+	error: z.string().nullable()
 });
 const VideoSearchResponseSchema = z.object({
 	items: z.array(z.discriminatedUnion("type", [PlaylistDocSchema, VideoDocSchema])),
@@ -62,4 +77,4 @@ const VideoIdsQuerySchema = z.object({ type: z.enum(["video", "playlist"]).optio
 const VideoIdsResponseSchema = z.array(z.string());
 
 //#endregion
-export { PlaylistDetailResponseSchema, PlaylistDocSchema, PlaylistIdParamSchema, PlaylistVideosQuerySchema, PlaylistVideosResponseSchema, VideoAdminSyncQueuedResponseSchema, VideoAdminSyncRequestSchema, VideoAdminSyncResponseSchema, VideoDetailResponseSchema, VideoDocSchema, VideoIdParamSchema, VideoIdsQuerySchema, VideoIdsResponseSchema, VideoSearchQuerySchema, VideoSearchResponseSchema, VideoSearchTargetSchema };
+export { PlaylistDetailResponseSchema, PlaylistDocSchema, PlaylistIdParamSchema, PlaylistVideosQuerySchema, PlaylistVideosResponseSchema, VideoAdminSyncQueuedResponseSchema, VideoAdminSyncRequestSchema, VideoAdminSyncResponseSchema, VideoAdminSyncStatusResponseSchema, VideoAdminSyncStatusSchema, VideoDetailResponseSchema, VideoDocSchema, VideoIdParamSchema, VideoIdsQuerySchema, VideoIdsResponseSchema, VideoSearchQuerySchema, VideoSearchResponseSchema, VideoSearchTargetSchema };

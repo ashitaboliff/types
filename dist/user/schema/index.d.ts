@@ -59,7 +59,13 @@ declare const ProfileSchema: z.ZodObject<{
   isDeleted: z.ZodBoolean;
 }, z.core.$strip>;
 declare const ProfileUpsertRequestSchema: z.ZodObject<{
+  role: z.ZodEnum<{
+    GRADUATE: "GRADUATE";
+    STUDENT: "STUDENT";
+  }>;
   name: z.ZodNullable<z.ZodString>;
+  studentId: z.ZodNullable<z.ZodString>;
+  expected: z.ZodNullable<z.ZodString>;
   part: z.ZodNullable<z.ZodArray<z.ZodEnum<{
     VOCAL: "VOCAL";
     BACKING_GUITAR: "BACKING_GUITAR";
@@ -69,12 +75,6 @@ declare const ProfileUpsertRequestSchema: z.ZodObject<{
     KEYBOARD: "KEYBOARD";
     OTHER: "OTHER";
   }>>>;
-  studentId: z.ZodNullable<z.ZodString>;
-  expected: z.ZodNullable<z.ZodString>;
-  role: z.ZodEnum<{
-    GRADUATE: "GRADUATE";
-    STUDENT: "STUDENT";
-  }>;
 }, z.core.$strip>;
 declare const ProfileResponseSchema: z.ZodObject<{
   id: z.ZodString;

@@ -7,6 +7,7 @@ import type {
 	VideoAdminSyncQueuedResponseSchema,
 	VideoAdminSyncRequestSchema,
 	VideoAdminSyncResponseSchema,
+	VideoAdminSyncStatusResponseSchema,
 	VideoDetailResponseSchema,
 	VideoDocSchema,
 	VideoIdsQuerySchema,
@@ -76,6 +77,9 @@ export type VideoAdminSyncResponse = z.infer<
 >
 export type VideoAdminSyncQueuedResponse = z.infer<
 	typeof VideoAdminSyncQueuedResponseSchema
+>
+export type VideoAdminSyncStatusResponse = z.infer<
+	typeof VideoAdminSyncStatusResponseSchema
 >
 export type PlaylistVideosQuery = z.infer<typeof PlaylistVideosQuerySchema>
 export type PlaylistVideosResponse = z.infer<

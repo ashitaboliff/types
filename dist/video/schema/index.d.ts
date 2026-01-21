@@ -89,6 +89,26 @@ declare const VideoAdminSyncResponseSchema: z.ZodObject<{
 declare const VideoAdminSyncQueuedResponseSchema: z.ZodObject<{
   status: z.ZodLiteral<"queued">;
   message: z.ZodString;
+  jobId: z.ZodString;
+}, z.core.$strip>;
+declare const VideoAdminSyncStatusSchema: z.ZodEnum<{
+  queued: "queued";
+  processing: "processing";
+  succeeded: "succeeded";
+  failed: "failed";
+}>;
+declare const VideoAdminSyncStatusResponseSchema: z.ZodObject<{
+  jobId: z.ZodString;
+  status: z.ZodEnum<{
+    queued: "queued";
+    processing: "processing";
+    succeeded: "succeeded";
+    failed: "failed";
+  }>;
+  queuedAt: z.ZodString;
+  startedAt: z.ZodNullable<z.ZodString>;
+  finishedAt: z.ZodNullable<z.ZodString>;
+  error: z.ZodNullable<z.ZodString>;
 }, z.core.$strip>;
 declare const VideoSearchResponseSchema: z.ZodObject<{
   items: z.ZodArray<z.ZodDiscriminatedUnion<[z.ZodObject<{
@@ -139,4 +159,4 @@ declare const VideoIdsQuerySchema: z.ZodObject<{
 }, z.core.$strip>;
 declare const VideoIdsResponseSchema: z.ZodArray<z.ZodString>;
 //#endregion
-export { PlaylistDetailResponseSchema, PlaylistDocSchema, PlaylistIdParamSchema, PlaylistVideosQuerySchema, PlaylistVideosResponseSchema, VideoAdminSyncQueuedResponseSchema, VideoAdminSyncRequestSchema, VideoAdminSyncResponseSchema, VideoDetailResponseSchema, VideoDocSchema, VideoIdParamSchema, VideoIdsQuerySchema, VideoIdsResponseSchema, VideoSearchQuerySchema, VideoSearchResponseSchema, VideoSearchTargetSchema };
+export { PlaylistDetailResponseSchema, PlaylistDocSchema, PlaylistIdParamSchema, PlaylistVideosQuerySchema, PlaylistVideosResponseSchema, VideoAdminSyncQueuedResponseSchema, VideoAdminSyncRequestSchema, VideoAdminSyncResponseSchema, VideoAdminSyncStatusResponseSchema, VideoAdminSyncStatusSchema, VideoDetailResponseSchema, VideoDocSchema, VideoIdParamSchema, VideoIdsQuerySchema, VideoIdsResponseSchema, VideoSearchQuerySchema, VideoSearchResponseSchema, VideoSearchTargetSchema };
